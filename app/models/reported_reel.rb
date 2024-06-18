@@ -1,0 +1,2 @@
+class ReportedReel < ApplicationRecord
+end
