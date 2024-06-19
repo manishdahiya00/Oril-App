@@ -23,6 +23,7 @@ module API
                     { status: 200, message: "Success", data: "#{creator.user_name} removed from following list" }
                 else
                   Follow.create(follower_id: params[:userId], following_id: params[:creatorId])
+                  Notification.create(user_id: params[:creatorId],creator_id: params[:userId],content: "#{user.user_name} stated following you",notification_type: "follow")
                   { status: 200, message: "Success", data: "#{creator.user_name} added to following list" }
                 end
               else

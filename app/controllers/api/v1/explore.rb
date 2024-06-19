@@ -30,15 +30,16 @@ module API
               end
               popular_reels = Reel.where(isReported: false).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).order(like_count: :desc).limit(10)
               popular_reels.each do |reel|
-                popularHathtags << {
-                  hashName: reel.hastags,
-                  hashData: {
+                  popularHathtags << {
+                  hashName: reel.hastags.split(" ").first,
+                  hashData: [
                     reelId: reel.id,
                     reelUrl: reel.video.url,
-                  }
+                  ]
                 }
               end
-              { status: 200, message: "Success", popularCreators: popularCreators || [], hashtags: [] }
+              puts popularHathtags
+              { status: 200, message: "Success", popularCreators: popularCreators || [], hashtags: popularHathtags || [] }
             else
               { status: 500, message: "User Not Found" }
             end

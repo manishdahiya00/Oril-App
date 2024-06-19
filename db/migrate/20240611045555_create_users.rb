@@ -28,7 +28,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :facebook_url
       t.string :insta_url
       t.string :yt_url
-      t.boolean :status,default: true
+      t.string :status,default: "Verification Request"
 
       t.timestamps
     end

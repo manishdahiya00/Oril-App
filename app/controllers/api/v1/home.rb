@@ -34,7 +34,7 @@ module API
                      creatorId: creator.id,
                      creatorName: creator.social_name,
                      creatorImageUrl: creator.social_img_url,
-                     isVerified: true,
+                     isVerified: creator.is_verified,
                      profileCategory: creator.category,
                      shareUrl:  "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/reels/#{reel.id}/?inviteBy=#{creator.refer_code}",
                   }
@@ -63,7 +63,7 @@ module API
             user = User.find(params[:userId])
             if user.present?
               popularCreators = []
-              popular_creators = User.with_follower_count.order('follower_count DESC').where.not(id: user.blocked_users.pluck(:blocked_user))
+              popular_creators = User.with_follower_count.order('follower_count DESC').where.not(id: 999).where.not(id: user.blocked_users.pluck(:blocked_user))
               popular_creators.each do |creator|
                 popularCreators << {
                   creatorId: creator.id,
@@ -79,6 +79,47 @@ module API
             end
           rescue Exception => e
             Rails.logger.error "API Exception - #{Time.now} - homeFollowing - #{params.inspect} - Error - #{e.message}"
+            { status: 500, message: "Error", error: e.message }
+          end
+        end
+      end
+
+
+
+      resource :notificationList do
+
+        params do
+          use :common_params
+          requires :page, type: String, allow_blank: false
+        end
+
+        post do
+          begin
+            user = User.find(params[:userId])
+            if user.present?
+              data = {}
+              notificationsList = []
+              user.notifications.where.not(creator_id: user.id).order(created_at: :desc).paginate(page: params[:page], per_page: 12).each do |notification|
+                puts notification.id
+                user = User.find(notification.creator_id)
+                notificationsList << {
+                  id: notification.id,
+                  creatorId: user.id,
+                  creatorFullName: user.social_name,
+                  creatorImageUrl: user.social_img_url,
+                  NotificationType: notification.notification_type,
+                  NotificationContent: notification.content,
+                  reelId: notification.reel_id || 0
+                }
+              end
+              data[:notificationList] = notificationsList
+              puts notificationsList.to_s
+              { status: 200, message: "Success", data: data || {} }
+            else
+              { status: 500, message: "User Not Found"}
+            end
+          rescue Exception => e
+            Rails.logger.error "API Exception - #{Time.now} - notificationList - #{params.inspect} - Error - #{e.message}"
             { status: 500, message: "Error", error: e.message }
           end
         end

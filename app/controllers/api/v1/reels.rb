@@ -60,6 +60,7 @@ module API
             { status: 200, message: "Success", data: "Reel unliked Successfully" }
            else
             user.likes.create(reel_id: params[:reelId])
+            Notification.create(user_id: reel.creater_id,creator_id: params[:userId],content: "#{user.user_name} liked your reel",notification_type: "like",reel_id: reel.id)
             likeCount = reel.like_count + 1
             reel.update(like_count: likeCount)
             { status: 200, message: "Success", data: "Reel Liked Successfully" }
@@ -112,7 +113,7 @@ module API
                 creatorId: creator.id,
                 creatorName: creator.social_name,
                 creatorImageUrl: creator.social_img_url,
-                isVerified: true,
+                isVerified: creator.is_verified,
                 profileCategory: creator.category,
                 shareUrl:  "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/reels/#{reel.id}/?inviteBy=#{creator.refer_code}",
               }
@@ -134,7 +135,30 @@ module API
                   creatorId: creator.id,
                   creatorName: creator.social_name,
                   creatorImageUrl: creator.social_img_url,
-                  isVerified: true,
+                  isVerified: creator.is_verified,
+                  profileCategory: creator.category,
+                  shareUrl:  "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/reels/#{reel.id}/?inviteBy=#{creator.refer_code}",
+                }
+              end
+              elsif params[:hashtag].present?
+                hashtags = Reel.where("hastags LIKE ?","%#{params[:hashtag]}%")
+                hashtags.where(isReported: false).order(created_at: :desc).each do |reel|
+              creator = User.find(reel.creater_id)
+              isLiked = user.likes.find_by(reel_id: reel.id).present?
+                reels << {
+                  reelId: reel.id,
+                  allowComments: reel.allow_comments,
+                  videoUrl: reel.video.url,
+                  isLiked: isLiked,
+                  reelDescription: reel.description,
+                  musicTitle: reel.music&.title || "",
+                  musicId: reel.music&.id || 0,
+                  likes: reel.like_count,
+                  comments: reel.comments.count,
+                  creatorId: creator.id,
+                  creatorName: creator.social_name,
+                  creatorImageUrl: creator.social_img_url,
+                  isVerified: creator.is_verified,
                   profileCategory: creator.category,
                   shareUrl:  "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/reels/#{reel.id}/?inviteBy=#{creator.refer_code}",
                 }
@@ -157,7 +181,7 @@ module API
                   creatorId: creator.id,
                   creatorName: creator.social_name,
                   creatorImageUrl: creator.social_img_url,
-                  isVerified: true,
+                  isVerified: creator.is_verified,
                   profileCategory: creator.category,
                   shareUrl:  "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/reels/#{reel.id}/?inviteBy=#{creator.refer_code}",
               }
@@ -182,7 +206,7 @@ module API
                   creatorId: reel_creator.id,
                   creatorName: reel_creator.social_name,
                   creatorImageUrl: reel_creator.social_img_url,
-                  isVerified: true,
+                  isVerified: creator.is_verified,
                   profileCategory: reel_creator.category,
                   shareUrl:  "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/reels/#{reel.id}/?inviteBy=#{reel_creator.refer_code}",
               }
@@ -205,7 +229,7 @@ module API
                   creatorId: creator.id,
                   creatorName: creator.social_name,
                   creatorImageUrl: creator.social_img_url,
-                  isVerified: true,
+                  isVerified: creator.is_verified,
                   profileCategory: creator.category,
                   shareUrl:  "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/reels/#{reel.id}/?inviteBy=#{creator.refer_code}",
               }
@@ -232,7 +256,7 @@ module API
                 creatorId: creator.id,
                 creatorName: creator.social_name,
                 creatorImageUrl: creator.social_img_url,
-                isVerified: true,
+                isVerified: creator.is_verified,
                 profileCategory: creator.category,
                 shareUrl:  "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/reels/#{reel.id}/?inviteBy=#{creator.refer_code}",
               }
@@ -265,6 +289,7 @@ module API
           if user.present?
             reel = Reel.find(params[:reelId])
             reel.comments.create(content: params[:content],user_id: params[:userId])
+            Notification.create(user_id: reel.creater_id,creator_id: params[:userId],content: "#{user.user_name} commented on your reel",notification_type: "comment",reel_id: reel.id)
             { status: 200, message: "Success", data: "Comment Added Successfully" }
           else
             { status: 500, message: "User Not Found" }

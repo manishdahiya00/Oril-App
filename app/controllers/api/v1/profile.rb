@@ -130,7 +130,7 @@ module API
               user_reels_ids = creator.reels.where(isReported: false).pluck(:id)
               user_liked_reels = Like.where(reel_id: user_reels_ids)
               user_ids_who_liked = user_liked_reels.pluck(:user_id)
-              users = User.where(id: user_ids_who_liked).where.not(id: user.blocked_users.pluck(:blocked_user))
+              users = User.where(id: user_ids_who_liked).where.not(id: 999).where.not(id: user.blocked_users.pluck(:blocked_user))
               users.each do |user|
                 user.likes.where(reel_id: user_reels_ids).each do |like|
                   data << {
@@ -288,12 +288,11 @@ module API
             if user.present?
               data = {
                 notifyMe: true,
-                showYourLikedVideos: false,
+                showYourLikedVideos: true,
                 shareProfile: "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/users/#{user.id}/?inviteBy=#{user.refer_code}",
-                verification: false,
+                verification: user.status,
                 termsOfUse: "#{BASE_URL}/terms_of_use.html",
                 privacyPolicy: "#{BASE_URL}/privacy_policy.html",
-
               }
               { status: 200, message: "Success", data: data}
             else
@@ -331,6 +330,40 @@ module API
                 }
               end
               { status: 200, message: "Success", blockedUsers: blockedUsers || []}
+            else
+              { status: 500, message: "User Not Found" }
+            end
+          rescue Exception => e
+            Rails.logger.error "API Exception - #{Time.now} - blockedProfile - #{params.inspect} - Error - #{e.message}"
+            { status: 500, message: "Error", error: e.message }
+          end
+        end
+      end
+
+      resource :verificationRequest do
+        before {api_params}
+
+
+        params do
+          use :common_params
+          requires :socialType, type: String, allow_blank: false
+          requires :socialId, type: String, allow_blank: false
+          requires :image, type: File, allow_blank: false
+        end
+
+        post do
+          begin
+            user = User.find(params[:userId])
+            if user.present?
+              image = ActionDispatch::Http::UploadedFile.new(params[:image])
+              VerificationRequest.create(
+                user_id: user.id,
+                social_type: params[:socialType],
+                social_id: params[:socialId],
+                selfie_image: image
+              )
+              user.update(status: "Verification Pending")
+              { status: 200, message: "Success", data: "Verification Request Submitted"}
             else
               { status: 500, message: "User Not Found" }
             end
