@@ -22,7 +22,7 @@ module API
               isFollowing = Follow.find_by(follower_id: current_user.id,following_id: user.id).present?
               isBlocked = current_user.blocked_users.find_by(blocked_user: params[:creatorId]).present?
               creatorReels = []
-              creatorLikedReels = []
+              likedReels = []
              if !isBlocked
               profileData = {
                 fullName: user.social_name,
@@ -39,7 +39,7 @@ module API
                 isVerified: user.is_verified
               }
               ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
-              reels = user.reels.where(isReported: false).paginate(page: params[:page], per_page: 12)
+              reels = user.reels.where(isReported: false,is_approved: true).paginate(page: params[:page], per_page: 12)
               reels.order(created_at: :desc).each_with_index do |reel,index|
                 creatorReels << {
                   reelId: reel.id,
@@ -50,16 +50,25 @@ module API
                 }
               end
               liked_reels = Like.where(user_id: user.id).joins(:reel)
-              .where(reels: { isReported: false }).paginate(page: params[:page], per_page: 12)
+              .where(reels: { isReported: false,is_approved: true }).paginate(page: params[:page], per_page: 12)
               liked_reels.order(created_at: :desc).each_with_index do |reel,index|
                 liked_reel = Reel.find(reel.reel_id)
-                creatorLikedReels << {
+                likedReels << {
                   reelId: liked_reel.id,
                   reelUrl: liked_reel.video.url,
                   views: liked_reel.view_count,
                   index: index,
                   page: params[:page]
                 }
+              end
+             end
+             if user.id == current_user.id
+                creatorLikedReels = likedReels
+             else
+              if user.show_liked_reels == true
+                creatorLikedReels = likedReels
+              else
+                creatorLikedReels = []
               end
              end
             { status: 200, message: "Success", isFollowing: isFollowing, isBlocked: isBlocked, profileData: profileData, creatorReels: creatorReels || [], creatorLikedReels: creatorLikedReels || [] }
@@ -99,7 +108,12 @@ module API
                  ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
                 image_url = user.profileImage.url
               end
-              user.update(social_img_url: image_url,category: params[:profileCategory], social_name: params[:profileFullName],user_name: params[:userName], bio: params[:bio], insta_url: params[:instagramUrl],yt_url: params[:youtubeUrl],facebook_url: params[:fbUrl],profileImage: image)
+              if params[:fullName].nil?
+                social_name = user.social_name
+              else
+                social_name = params[:fullName]
+              end
+              user.update(social_img_url: image_url,category: params[:profileCategory], social_name: social_name,user_name: params[:userName], bio: params[:bio], insta_url: params[:instagramUrl],yt_url: params[:youtubeUrl],facebook_url: params[:fbUrl],profileImage: image)
               { status: 200, message: "Success" ,data: "Profile updated successfully"}
             else
               { status: 500, message: "User Not Found" }
@@ -127,10 +141,10 @@ module API
             if user.present?
               data = []
               creator = User.find(params[:creatorId])
-              user_reels_ids = creator.reels.where(isReported: false).pluck(:id)
+              user_reels_ids = creator.reels.where(isReported: false,is_approved: true).pluck(:id)
               user_liked_reels = Like.where(reel_id: user_reels_ids)
               user_ids_who_liked = user_liked_reels.pluck(:user_id)
-              users = User.where(id: user_ids_who_liked).where.not(id: 999).where.not(id: user.blocked_users.pluck(:blocked_user))
+              users = User.where(id: user_ids_who_liked).where.not(id: user.blocked_users.pluck(:blocked_user))
               users.each do |user|
                 user.likes.where(reel_id: user_reels_ids).each do |like|
                   data << {
@@ -287,8 +301,7 @@ module API
             user = User.find(params[:userId])
             if user.present?
               data = {
-                notifyMe: true,
-                showYourLikedVideos: true,
+                showYourLikedVideos: user.show_liked_reels,
                 shareProfile: "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/users/#{user.id}/?inviteBy=#{user.refer_code}",
                 verification: user.status,
                 termsOfUse: "#{BASE_URL}/terms_of_use.html",
@@ -374,6 +387,31 @@ module API
         end
       end
 
+
+      resource :updateSetting do
+        before {api_params}
+
+
+        params do
+          use :common_params
+          optional :showYourLikedVideos, type: String, allow_blank: true
+        end
+
+        post do
+          begin
+            user = User.find(params[:userId])
+            if user.present?
+              user.update(show_liked_reels: params[:showYourLikedVideos])
+              { status: 200, message: "Success", data: "Settings updated successfully"}
+            else
+              { status: 500, message: "User Not Found" }
+            end
+          rescue Exception => e
+            Rails.logger.error "API Exception - #{Time.now} - updateSettings - #{params.inspect} - Error - #{e.message}"
+            { status: 500, message: "Error", error: e.message }
+          end
+        end
+      end
 
 
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_19_102428) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_20_092215) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -101,6 +101,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_19_102428) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.string "user_id"
+    t.string "amount"
+    t.string "payment_id"
+    t.string "order_id"
+    t.string "receipt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reels", force: :cascade do |t|
     t.integer "music_id"
     t.string "description"
@@ -113,6 +123,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_19_102428) do
     t.boolean "isReported", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_approved", default: false
   end
 
   create_table "reported_reels", force: :cascade do |t|
@@ -147,6 +158,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_19_102428) do
     t.string "source_ip"
     t.string "security_token"
     t.boolean "is_verified", default: false
+    t.boolean "show_liked_reels", default: true
     t.string "category"
     t.string "bio"
     t.string "facebook_url"
@@ -155,6 +167,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_19_102428) do
     t.string "status", default: "Verification Request"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "wallet_balance", default: 0
   end
 
   create_table "verification_requests", force: :cascade do |t|

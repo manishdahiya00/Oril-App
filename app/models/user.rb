@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :blocked_users, foreign_key: "blocking_user"
   has_one :delete_request
   has_many :notifications
+  has_many :orders
 
   scope :with_follower_count, -> {
     left_joins(:inverse_follows)

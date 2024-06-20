@@ -23,6 +23,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :source_ip
       t.string :security_token
       t.boolean :is_verified,default: false
+      t.boolean :show_liked_reels,default: true
       t.string :category
       t.string :bio
       t.string :facebook_url

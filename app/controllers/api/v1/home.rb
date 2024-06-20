@@ -18,7 +18,7 @@ module API
               ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
               reels = []
               User.where.not(id: user.blocked_users.pluck(:blocked_user)).each do |reel_user|
-                reel_user.reels.where(isReported: false).each do |reel|
+                reel_user.reels.where(isReported: false,is_approved: true).order("RANDOM()").limit(6).each do |reel|
                   creator = User.find(reel.creater_id)
                   isLiked = user.likes.find_by(reel_id: reel.id).present?
                   reels << {
@@ -63,7 +63,7 @@ module API
             user = User.find(params[:userId])
             if user.present?
               popularCreators = []
-              popular_creators = User.with_follower_count.order('follower_count DESC').where.not(id: 999).where.not(id: user.blocked_users.pluck(:blocked_user))
+              popular_creators = User.with_follower_count.order('follower_count DESC').where.not(id: user.blocked_users.pluck(:blocked_user))
               popular_creators.each do |creator|
                 popularCreators << {
                   creatorId: creator.id,

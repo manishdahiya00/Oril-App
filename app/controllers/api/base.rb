@@ -8,5 +8,6 @@ module API
     mount API::V1::Explore
     mount API::V1::Musics
     mount API::V1::Follows
+    mount API::V1::Redeem
   end
 end

@@ -26,7 +26,7 @@ module API
                   reelsCount: music.reels.count,
                   isFavourite: isFavourite
                 }
-                music.reels.where(isReported: false).each do |reel|
+                music.reels.where(isReported: false,is_approved: true).each do |reel|
                   reels << {
                       reelId: reel.id,
                       reelUrl: reel.video.url,

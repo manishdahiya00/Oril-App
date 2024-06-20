@@ -16,8 +16,8 @@ module API
             if user.present?
               ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
               popularCreators = []
-              popularHathtags = []
-              popular_creators = User.with_follower_count.order('follower_count DESC').where.not(id: 999).where.not(id: user.blocked_users.pluck(:blocked_user)).where.not(id: params[:userId]).limit(10)
+              popularHashtags = []
+              popular_creators = User.with_follower_count.order('follower_count DESC').where.not(id: user.blocked_users.pluck(:blocked_user)).where.not(id: params[:userId]).limit(10)
               popular_creators.each do |creator|
                 popularCreators << {
                   creatorId: creator.id,
@@ -28,18 +28,21 @@ module API
                   followersCount: creator.follower_count
                 }
               end
-              popular_reels = Reel.where(isReported: false).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).order(like_count: :desc).limit(10)
+              popular_reels = Reel.where(isReported: false,is_approved: true).where.not(hastags: ["", " ", "#", "# "]).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).order(like_count: :desc).limit(10)
+              popular_hashtags = Hash.new { |hash, key| hash[key] = { hashName: "##{key}", hashData: [] } }
               popular_reels.each do |reel|
-                  popularHathtags << {
-                  hashName: reel.hastags.split(" ").first,
-                  hashData: [
+                hashtags = reel.hastags.split(" ")
+                hashtags.each do |hashtag|
+                  normalized_hashtag = hashtag.delete_prefix("#").strip
+                  next if normalized_hashtag.empty?
+                  popular_hashtags[normalized_hashtag][:hashData] << {
                     reelId: reel.id,
-                    reelUrl: reel.video.url,
-                  ]
-                }
+                    reelUrl: reel.video.url
+                  }
+                end
               end
-              puts popularHathtags
-              { status: 200, message: "Success", popularCreators: popularCreators || [], hashtags: popularHathtags || [] }
+              popularHashtags = popular_hashtags.values
+              { status: 200, message: "Success", popularCreators: popularCreators || [], hashtags: popularHashtags || [] }
             else
               { status: 500, message: "User Not Found" }
             end
@@ -69,7 +72,7 @@ module API
               if params[:category].present?
                 userList = []
                 reelList = []
-                category_searched_users = User.where(category: params[:category]).where.not(id: 999).where.not(id: user.blocked_users.pluck(:blocked_user)).limit(20)
+                category_searched_users = User.where(category: params[:category]).where.not(id: user.blocked_users.pluck(:blocked_user)).limit(20)
                 category_searched_users.each do |user|
                   userList << {
                     creatorId: user.id,
@@ -81,7 +84,7 @@ module API
                     likesCount: user.reels.sum(:like_count),
                   }
                 end
-                category_searched_reels = Reel.where(isReported: false).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).order(like_count: :desc).joins(:user).where(user: { category: params[:category] }).limit(20)
+                category_searched_reels = Reel.where(isReported: false,is_approved: true).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).order(like_count: :desc).joins(:user).where(user: { category: params[:category] }).limit(20)
                 category_searched_reels.each do |reel|
                   creator = User.find(reel.creater_id)
                     reelList << {
@@ -95,8 +98,8 @@ module API
                 elsif params[:keyword].present?
                   userList = []
                   reelList = []
-                  keyword_searched_users = User.where("LOWER(user_name) LIKE ? OR LOWER(social_name) LIKE ?", "%#{params[:keyword].downcase}%", "%#{params[:keyword].downcase}%").where.not(id: 999).where.not(id: user.blocked_users.pluck(:blocked_user)).limit(20)
-                  keyword_searched_reels = Reel.where(isReported: false).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).where("LOWER(hastags) LIKE ? OR LOWER(description) LIKE ?", "%#{params[:keyword].downcase}%", "%#{params[:keyword].downcase}%").limit(20)
+                  keyword_searched_users = User.where("LOWER(user_name) LIKE ? OR LOWER(social_name) LIKE ?", "%#{params[:keyword].downcase}%", "%#{params[:keyword].downcase}%").where.not(id: user.blocked_users.pluck(:blocked_user)).limit(20)
+                  keyword_searched_reels = Reel.where(isReported: false,is_approved: true).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).where("LOWER(hastags) LIKE ? OR LOWER(description) LIKE ?", "%#{params[:keyword].downcase}%", "%#{params[:keyword].downcase}%").limit(20)
                   keyword_searched_users.each do |user|
                     userList << {
                       creatorId: user.id,

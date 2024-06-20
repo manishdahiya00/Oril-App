@@ -58,8 +58,16 @@ module API
 
         post do
           begin
+            ip_addr = request.ip
             if params[:email] == 'testingyash8@gmail.com' && params[:password] == 'yash@123'
-              {message: "Success", status: 200, userId: 999, securityToken: 'acc7106fe5009609'}
+              user = User.find_by(social_email: params[:email])
+              if user.present?
+                {message: "Success", status: 200, userId: user.id, securityToken: user.security_token}
+              else
+                new_user = User.create(social_name: "Testing Yash",social_email: params[:email],user_name: params[:email].split("@").first,security_token: "acc7106fe5009609",source_ip: ip_addr,
+                refer_code: SecureRandom.hex(6).upcase,social_img_url: "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png")
+                {message: "Success", status: 200, userId: new_user.id, securityToken: new_user.security_token}
+              end
             else
               {message: "User Not Found", status: 500}
             end

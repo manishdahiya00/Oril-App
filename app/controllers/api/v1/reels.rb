@@ -106,8 +106,8 @@ module API
                 videoUrl: reel.video.url,
                 isLiked: isLiked,
                 reelDescription: reel.description,
-                musicTitle: reel.music&.title || "",
-                musicId: reel.music&.id || 0,
+                musicTitle: reel.music&.title,
+                musicId: reel.music&.id,
                 likes: reel.like_count,
                 comments: reel.comments.count,
                 creatorId: creator.id,
@@ -119,7 +119,7 @@ module API
               }
             elsif params[:musicId].present?
               music = Music.find(params[:musicId])
-              music.reels.where(isReported: false).order(created_at: :desc).each do |reel|
+              music.reels.where(isReported: false,is_approved: true).order(created_at: :desc).each do |reel|
               creator = User.find(reel.creater_id)
               isLiked = user.likes.find_by(reel_id: reel.id).present?
                 reels << {
@@ -128,8 +128,8 @@ module API
                   videoUrl: reel.video.url,
                   isLiked: isLiked,
                   reelDescription: reel.description,
-                  musicTitle: reel.music&.title || "",
-                  musicId: reel.music&.id || 0,
+                  musicTitle: reel.music&.title,
+                  musicId: reel.music&.id,
                   likes: reel.like_count,
                   comments: reel.comments.count,
                   creatorId: creator.id,
@@ -142,7 +142,7 @@ module API
               end
               elsif params[:hashtag].present?
                 hashtags = Reel.where("hastags LIKE ?","%#{params[:hashtag]}%")
-                hashtags.where(isReported: false).order(created_at: :desc).each do |reel|
+                hashtags.where(isReported: false,is_approved: true).order(created_at: :desc).each do |reel|
               creator = User.find(reel.creater_id)
               isLiked = user.likes.find_by(reel_id: reel.id).present?
                 reels << {
@@ -151,8 +151,8 @@ module API
                   videoUrl: reel.video.url,
                   isLiked: isLiked,
                   reelDescription: reel.description,
-                  musicTitle: reel.music&.title || "",
-                  musicId: reel.music&.id || 0,
+                  musicTitle: reel.music&.title,
+                  musicId: reel.music&.id,
                   likes: reel.like_count,
                   comments: reel.comments.count,
                   creatorId: creator.id,
@@ -165,7 +165,7 @@ module API
               end
             elsif  params[:creatorReels].present?
               creator = User.find(params[:creatorReels])
-              user_reels = creator.reels.where(isReported: false).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).paginate(page: params[:page],per_page: 12)
+              user_reels = creator.reels.where(isReported: false,is_approved: true).order(created_at: :desc).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).paginate(page: params[:page],per_page: 12)
               user_reels.each do |reel|
                 isLiked = user.likes.find_by(reel_id: reel.id).present?
                 reels << {
@@ -174,8 +174,8 @@ module API
                   videoUrl: reel.video.url,
                   isLiked: isLiked,
                   reelDescription: reel.description,
-                  musicTitle: reel.music&.title || "",
-                  musicId: reel.music&.id || 0,
+                  musicTitle: reel.music&.title,
+                  musicId: reel.music&.id,
                   likes: reel.like_count,
                   comments: reel.comments.count,
                   creatorId: creator.id,
@@ -189,7 +189,7 @@ module API
             elsif  params[:creatorLikedReels].present?
               creator = User.find(params[:creatorLikedReels])
               user_likes = creator.likes.where.not(user_id: user.blocked_users.pluck(:blocked_user)).paginate(page: params[:page],per_page: 12).pluck(:reel_id)
-              user_reels = Reel.where(id: user_likes,isReported: false)
+              user_reels = Reel.where(id: user_likes,isReported: false,is_approved: true)
               user_reels.each do |reel|
                 reel_creator = User.find(reel.creater_id)
                 isLiked = creator.likes.find_by(reel_id: reel.id).present?
@@ -199,8 +199,8 @@ module API
                   videoUrl: reel.video.url,
                   isLiked: isLiked,
                   reelDescription: reel.description,
-                  musicTitle: reel.music&.title || "",
-                  musicId: reel.music&.id || 0,
+                  musicTitle: reel.music&.title,
+                  musicId: reel.music&.id,
                   likes: reel.like_count,
                   comments: reel.comments.count,
                   creatorId: reel_creator.id,
@@ -212,7 +212,7 @@ module API
               }
             end
             elsif  params[:category].present?
-              user_reels = Reel.where(isReported: false).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).order(like_count: :desc).joins(:user).where(user: { category: params[:category] }).paginate(page: params[:page], per_page: 12)
+              user_reels = Reel.where(isReported: false,is_approved: true).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).order(like_count: :desc).joins(:user).where(user: { category: params[:category] }).paginate(page: params[:page], per_page: 12)
               user_reels.each do |reel|
                 creator = User.find(reel.creater_id)
                 isLiked = user.likes.find_by(reel_id: reel.id).present?
@@ -222,8 +222,8 @@ module API
                   videoUrl: reel.video.url,
                   isLiked: isLiked,
                   reelDescription: reel.description,
-                  musicTitle: reel.music&.title || "",
-                  musicId: reel.music&.id || 0,
+                  musicTitle: reel.music&.title,
+                  musicId: reel.music&.id,
                   likes: reel.like_count,
                   comments: reel.comments.count,
                   creatorId: creator.id,
@@ -235,7 +235,7 @@ module API
               }
             end
             else
-            user.reels.where(isReported: false).order(created_at: :desc).paginate(page: params[:page], per_page: 12).each do |reel|
+            user.reels.where(isReported: false,is_approved: true).order(created_at: :desc).paginate(page: params[:page], per_page: 12).each do |reel|
               creator = User.find(reel.creater_id)
               if reel.music_id.present?
                 music = Music.find(reel.music_id)
@@ -249,8 +249,8 @@ module API
                 videoUrl: reel.video.url,
                 isLiked: isLiked,
                 reelDescription: reel.description,
-                musicTitle: music&.title || "",
-                musicId: music&.id || 0,
+                musicTitle: music&.title,
+                musicId: music&.id,
                 likes: reel.like_count,
                 comments: reel.comments.count,
                 creatorId: creator.id,
@@ -380,7 +380,7 @@ module API
           user = User.find(params[:userId])
           if user.present?
             reel = Reel.find(params[:reelId])
-              if params[:user_id] == reel.creater_id
+              if params[:userId].to_s == reel.creater_id.to_s
                 { status: 200, message: "Success", data: true }
               else
                 view_count = reel.view_count + 1
