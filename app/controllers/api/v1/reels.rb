@@ -21,7 +21,6 @@ module API
           user = User.find(params[:userId])
           if user.present?
             video = ActionDispatch::Http::UploadedFile.new(params[:video])
-            ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
             reel = user.reels.create(
               music_id: params[:musicId] || nil,
               allow_comments: params[:allowComments],
@@ -97,7 +96,6 @@ module API
         begin
           user = User.find(params[:userId])
           if user.present?
-            ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
             reels = []
             if params[:reelId].present?
               reel = Reel.find(params[:reelId])

@@ -1,0 +1,62 @@
+<!-- Page Content -->
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <p id="notice" style="color: orange;"><%= notice %></p>
+      <div class="col-lg-12">
+        <h2 class="page-header" style="margin: 10px 0 15px !important;">Listing Reels</h2>
+      </div>
+      <!-- Reels Table -->
+      <% if @reels.present? %>
+        <table class="table table-responsive table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Video URL</th>
+              <th>Description</th>
+              <th>Like Count</th>
+              <th>Report Count</th>
+              <th>Creator ID</th>
+              <th>Approve</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @reels.each do |reel| %>
+              <tr>
+                <td><%= reel.id %></td>
+                <td>
+                  <% if reel.videoUrl.present? %>
+                    <video width="60" height="60" controls>
+                      <source src="<%= reel.videoUrl %>">
+                      Your browser does not support the video tag.
+                    </video>
+                  <% else %>
+                    No video available
+                  <% end %>
+                </td>
+                <td><%= reel.description %></td>
+                <td><%= reel.like_count %></td>
+                <td><%= reel.report_count %></td>
+                <td><%= reel.creater_id %></td>
+                <td>
+                    <% if reel.is_approved %>
+                        <%= button_to "Disapprove", approveReel_admin_reel_path(reel), method: :put %>
+                    <% else %>
+                        <%= button_to "Approve", approveReel_admin_reel_path(reel), method: :put %>
+                    <% end %>
+                </td>
+                <td>
+                  <%= link_to 'Show', admin_reel_path(reel) %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= will_paginate @reels %>
+      <% else %>
+        <h1 class="not-found">No Reels Found</h1>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<!-- Page Content -->
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <p id="notice" style="color:orange;"><%= notice %></p>
+      <div class="col-lg-12">
+        <h2 class="page-header" style="margin: 10px 0 15px !important;">Listing Users</h2>
+      </div>
+      <!-- User Details Table -->
+      <% if @users.present? %>
+        <table class="table table-responsive table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>User Image</th>
+              <th>User Name</th>
+              <th>User Email</th>
+              <th>Source Ip</th>
+              <th>Version Code/Name</th>
+              <th>Date Time</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.id %></td>
+                <td><img style="width:20px;" src="<%=user.try(:social_img_url)%>" onerror="this.onerror=null;this.src='https://cdn.pixabay.com/photo/2014/03/24/17/21/wrong-295503_640.png';" /></td>
+                <td><%= user.social_name %></td>
+                <td><%= user.social_email %></td>
+                <td><%= user.source_ip %></td>
+                <td><%= user.version_code %> / <%= user.version_name %></td>
+                <td><%= user.created_at.strftime("%d/%m/%y %I:%M %p") %></td>
+                <td>
+                  <%= link_to 'Show', admin_user_path(user) %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= will_paginate @users %>
+      <% else %>
+        <h1 class="not-found">No  Found</h1>
+      <% end %>
+    </div>
+  </div>
+</div>

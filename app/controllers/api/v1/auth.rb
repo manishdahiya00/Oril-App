@@ -4,8 +4,7 @@ module API
       include API::V1::Defaults
 
       resource :userSignup do
-        before {api_params}
-
+        before { api_params }
 
         params do
           requires :deviceId, type: String, allow_blank: false
@@ -31,16 +30,37 @@ module API
         post do
           begin
             ip_addr = request.ip
-            user = User.find_by(social_email: params[:socialEmail],social_id: params[:socialId])
+            user = User.find_by(social_email: params[:socialEmail], social_id: params[:socialId])
             if user.present?
-              { status: 200, message: "Success", userId: user.id, securityToken: user.security_token}
+              { status: 200, message: "Success", userId: user.id, securityToken: user.security_token }
             else
-              new_user = User.create(device_id: params[:deviceId],device_type: params[:deviceType],device_name: params[:deviceName],social_type: params[:socialType],social_id: params[:socialId],social_email: params[:socialEmail],user_name: params[:socialEmail].split("@").first,social_name: params[:socialName],social_img_url: params[:socialImgUrl],advertising_id: params[:advertisingId],version_name: params[:versionName],version_code: params[:versionCode],utm_source: params[:utmSource],utm_medium: params[:utmMedium],utm_term: params[:utmTerm],utm_content: params[:utmContent],utm_campaign: params[:utmCampaign],referal_url: params[:referrerUrl],security_token: SecureRandom.uuid,source_ip: ip_addr,
-              refer_code: SecureRandom.hex(6).upcase)
-              { status: 200, message: "Success", userId: new_user.id, securityToken: new_user.security_token}
+              new_user = User.create(
+                device_id: params[:deviceId],
+                device_type: params[:deviceType],
+                device_name: params[:deviceName],
+                social_type: params[:socialType],
+                social_id: params[:socialId],
+                social_email: params[:socialEmail],
+                user_name: params[:socialEmail].split("@").first,
+                social_name: params[:socialName],
+                social_img_url: params[:socialImgUrl],
+                advertising_id: params[:advertisingId],
+                version_name: params[:versionName],
+                version_code: params[:versionCode],
+                utm_source: params[:utmSource],
+                utm_medium: params[:utmMedium],
+                utm_term: params[:utmTerm],
+                utm_content: params[:utmContent],
+                utm_campaign: params[:utmCampaign],
+                referal_url: params[:referrerUrl],
+                security_token: SecureRandom.uuid,
+                source_ip: ip_addr,
+                refer_code: SecureRandom.hex(6).upcase
+              )
+              { status: 200, message: "Success", userId: new_user.id, securityToken: new_user.security_token }
             end
-          rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - googleSignUp - #{params.inspect} - Error - #{e.message}"
+          rescue => e
+            Rails.logger.error "API Exception - #{Time.now} - userSignup - #{params.inspect} - Error - #{e.message}"
             { status: 500, message: "Error", error: e.message }
           end
         end

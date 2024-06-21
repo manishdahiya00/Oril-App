@@ -1,0 +1,144 @@
+<!-- Page Content -->
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <p id="notice" style="color:orange;"><%= notice %></p>
+      <div class="col-lg-12 d-flex flex-row">
+        <h2 class="page-header" style="margin: 10px 0 15px !important;">User Details  
+        </h2>
+      </div>
+      <!-- User Details Table -->
+      <table class="table table-responsive table-bordered">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Device Id</th>
+            <th>Device Type</th>
+            <th>Device Name</th>
+            <th>Social Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+             <td><%= @user.id %></td>
+        <td><%= @user.device_id %></td>
+        <td><%= @user.device_type %></td>
+        <td><%= @user.device_name %></td>
+        <td><%= @user.social_type %></td>
+          </tr>
+        </tbody>
+      </table>
+
+       <table class="table table-responsive table-bordered">
+        <thead>
+          <tr>
+            <th>Social Id</th>
+            <th>Social Name</th>
+            <th>Social Email</th>
+            <th>User Name</th>
+            <th>Social Image</th>
+            <th>Ad Id</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @user.social_id %></td>
+            <td><%= @user.social_email %></td>
+            <td><%= @user.social_name %></td>
+            <td><%= @user.user_name %></td>
+            <td><img style="width:20px;" src="<%=@user.try(:social_img_url)%>" onerror="this.onerror=null;this.src='https://cdn.pixabay.com/photo/2014/03/24/17/21/wrong-295503_640.png';" /></td>
+            <td><%= @user.advertising_id %></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-responsive table-bordered">
+        <thead>
+          <tr>
+            <th>Version Name / Version Code</th>
+            <th>Utm Source</th>
+            <th>Utm Medium</th>
+            <th>Utm Term</th>
+            <th>Utm Content</th>
+            <th>Utm Campaign</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+        <td><%= @user.version_name %> / <%= @user.version_code %></td>
+        <td><%= @user.utm_source %></td>
+        <td><%= @user.utm_medium %></td>
+        <td><%= @user.utm_term %></td>
+        <td><%= @user.utm_content %></td>
+        <td><%= @user.utm_campaign %></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-responsive table-bordered">
+        <thead>
+          <tr>
+            <th>Referal Url</th>
+            <th>Refer Code</th>
+            <th>Source Ip</th>
+            <th>Verified</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+        <td><%= @user.referal_url %></td>
+        <td><%= @user.refer_code %></td>
+        <td><%= @user.source_ip %></td>
+        <td><%= @user.security_token %></td>
+        <td><%= @user.is_verified %></td>
+        <td><%= @user.category %></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-responsive table-bordered">
+        <thead>
+          <tr>
+            <th>Show Liked Reels</th>
+            <th>Bio</th>
+            <th>Insta Url</th>
+            <th>FB Url</th>
+            <th>YT Url</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+        <td><%= @user.show_liked_reels %></td>
+        <td><%= @user.bio %></td>
+        <td><%= @user.facebook_url %></td>
+        <td><%= @user.insta_url %></td>
+        <td><%= @user.yt_url %></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-responsive table-bordered">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Wallet Balance</th>
+            <th>Check In Balance</th>
+            <th>Received From Fans Balance</th>
+            <th>Video Upload Balance</th>
+            <th>Total Spending</th>
+            <th>Last Check In</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+        <td><%= @user.status %></td>
+        <td><%= @user.wallet_balance %></td>
+        <td><%= @user.check_in_balance %></td>
+        <td><%= @user.received_from_fans %></td>
+        <td><%= @user.video_upload_coins %></td>
+        <td><%= @user.total_spending %></td>
+        <td><%= @user.last_check_in.strftime("%d/%m/%y %I:%M %p") %></td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
+  </div>
+</div>

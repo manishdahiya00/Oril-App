@@ -1,18 +1,23 @@
-test:
-  service: Disk
-  root: <%= Rails.root.join("tmp/storage") %>
+# test:
+#   service: Disk
+#   root: <%= Rails.root.join("tmp/storage") %>
 
-local:
-  service: Disk
-  root: <%= Rails.root.join("storage") %>
+# local:
+#   service: Disk
+#   root: <%= Rails.root.join("storage") %>
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-# amazon:
-#   service: S3
-#   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-#   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-#   region: us-east-1
-#   bucket: your_own_bucket-<%= Rails.env %>
-
+digitalocean:
+  service: S3
+  access_key_id: MK6LIYIW2GJQWSFGTBZG
+  secret_access_key: 9yQudgFISM9l1QO1lOeNohAzOgzmLB/mgl24rCGdRT4
+  region: blr1
+  bucket: mindgeeksind
+  endpoint: https://blr1.digitaloceanspaces.com
+  http_open_timeout: 10
+  http_read_timeout: 10
+  retry_limit: 20
+  upload:
+    acl: "public-read"
 # Remember not to checkin your GCS keyfile to a repository
 # google:
 #   service: GCS

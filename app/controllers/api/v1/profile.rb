@@ -106,7 +106,6 @@ module API
                 image_url = user.social_img_url
               else
                 image = ActionDispatch::Http::UploadedFile.new(params[:profileImage])
-                 ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
                 image_url = user.profileImage.url
               end
               if params[:fullName].nil?

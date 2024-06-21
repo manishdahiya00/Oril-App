@@ -8,9 +8,13 @@ Rails.application.routes.draw do
   post "/admin" => "admin/login#login"
   delete "/admin/logout" => "admin/login#logout"
 
-
   namespace :admin do
     resources :users
+    resources :reels do
+      member do
+        put 'approveReel'
+      end
+    end
   end
 
 end

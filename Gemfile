@@ -69,3 +69,5 @@ end
 gem "grape", "~> 2.0"
 gem 'geocoder'
 gem 'will_paginate', '~> 4.0'
+
+gem "aws-sdk-s3", "~> 1.152"
