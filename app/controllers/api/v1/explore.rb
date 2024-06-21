@@ -14,7 +14,6 @@ module API
           begin
             user = User.find(params[:userId])
             if user.present?
-              ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
               popularCreators = []
               popularHashtags = []
               popular_creators = User.with_follower_count.order('follower_count DESC').where.not(id: user.blocked_users.pluck(:blocked_user)).where.not(id: params[:userId]).limit(10)
@@ -37,7 +36,7 @@ module API
                   next if normalized_hashtag.empty?
                   popular_hashtags[normalized_hashtag][:hashData] << {
                     reelId: reel.id,
-                    reelUrl: reel.video.url
+                    reelUrl: reel.videoUrl
                   }
                 end
               end
@@ -67,7 +66,6 @@ module API
           begin
             user = User.find(params[:userId])
             if user.present?
-              ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
               data = {}
               if params[:category].present?
                 userList = []
@@ -89,7 +87,7 @@ module API
                   creator = User.find(reel.creater_id)
                     reelList << {
                       reelId: reel.id,
-                      video_url: reel.video.url,
+                      video_url: reel.videoUrl,
                       viewCount: reel.view_count,
                     }
                 end
@@ -115,7 +113,7 @@ module API
                     creator = User.find(reel.creater_id)
                     reelList << {
                       reelId: reel.id,
-                      videoUrl: reel.video.url,
+                      videoUrl: reel.videoUrl,
                       likesCount: reel.like_count,
                       creatorId: creator.id,
                       creatorImageUrl: creator.social_img_url,

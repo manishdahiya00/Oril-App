@@ -21,9 +21,10 @@ module API
               current_user = User.find(params[:userId])
               isFollowing = Follow.find_by(follower_id: current_user.id,following_id: user.id).present?
               isBlocked = current_user.blocked_users.find_by(blocked_user: params[:creatorId]).present?
+              followers = user.followers.where.not(id: user.blocked_users.pluck(:blocked_user))
+              following = user.followers.where.not(id: user.blocked_users.pluck(:blocked_user))
               creatorReels = []
               likedReels = []
-             if !isBlocked
               profileData = {
                 fullName: user.social_name,
                 userImageUrl: user.social_img_url,
@@ -32,18 +33,18 @@ module API
                 instaUrl: user.insta_url,
                 youTubeUrl: user.yt_url,
                 likesCount:  user.reels.sum(:like_count),
-                followersCount: user.followers.count,
-                followingCount: user.following.count,
+                followersCount: followers.count,
+                followingCount: following.count,
                 userCategory: user.category || "Actor",
                 userBio: user.bio,
                 isVerified: user.is_verified
               }
-              ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
+             if !isBlocked
               reels = user.reels.where(isReported: false,is_approved: true).paginate(page: params[:page], per_page: 12)
               reels.order(created_at: :desc).each_with_index do |reel,index|
                 creatorReels << {
                   reelId: reel.id,
-                  reelUrl: reel.video.url,
+                  reelUrl: reel.videoUrl,
                   views: reel.view_count,
                   index: index,
                   page: params[:page]
@@ -55,7 +56,7 @@ module API
                 liked_reel = Reel.find(reel.reel_id)
                 likedReels << {
                   reelId: liked_reel.id,
-                  reelUrl: liked_reel.video.url,
+                  reelUrl: liked_reel.videoUrl,
                   views: liked_reel.view_count,
                   index: index,
                   page: params[:page]
@@ -71,7 +72,7 @@ module API
                 creatorLikedReels = []
               end
              end
-            { status: 200, message: "Success", isFollowing: isFollowing, isBlocked: isBlocked, profileData: profileData, creatorReels: creatorReels || [], creatorLikedReels: creatorLikedReels || [] }
+            { status: 200, message: "Success", isFollowing: isFollowing, isBlocked: isBlocked, profileData: profileData || {}, creatorReels: creatorReels || [], creatorLikedReels: creatorLikedReels || [] }
             else
               { status: 500, message: "User Not Found" }
             end

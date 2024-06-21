@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_one :delete_request
   has_many :notifications
   has_many :orders
+  has_many :redeems
+  has_many :transactions
 
   scope :with_follower_count, -> {
     left_joins(:inverse_follows)

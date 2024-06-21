@@ -4,6 +4,7 @@ class CreateReels < ActiveRecord::Migration[7.1]
       t.integer :music_id
       t.string :description
       t.string :hastags
+      t.string :videoUrl
       t.boolean :allow_comments
       t.integer :like_count,default: 0
       t.integer :view_count,default: 0

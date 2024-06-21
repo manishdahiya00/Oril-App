@@ -21,13 +21,16 @@ module API
           user = User.find(params[:userId])
           if user.present?
             video = ActionDispatch::Http::UploadedFile.new(params[:video])
+            ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
             reel = user.reels.create(
               music_id: params[:musicId] || nil,
               allow_comments: params[:allowComments],
               hastags: params[:hashtags],
               description: params[:description],
-              video: video,
+              video: video
             )
+             video_url = reel.video.url
+            reel.update(videoUrl: video_url)
             { status: 200, message: "Success", data: "Reel Created Successfully" }
           else
             { status: 500, message: "User Not Found" }

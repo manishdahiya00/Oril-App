@@ -16,7 +16,6 @@ module API
           begin
             user = User.find(params[:userId])
             if user.present?
-              ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
               reels = []
               music = Music.find(params[:musicId])
               isFavourite = user.fav_musics.find_by(music_id: params[:musicId]).present?
@@ -29,7 +28,7 @@ module API
                 music.reels.where(isReported: false,is_approved: true).each do |reel|
                   reels << {
                       reelId: reel.id,
-                      reelUrl: reel.video.url,
+                      reelUrl: reel.videoUrl,
                       viewCount: reel.view_count
                 }
                 end

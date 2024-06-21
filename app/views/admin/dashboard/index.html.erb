@@ -1,0 +1,126 @@
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <p id="notice" style="color:orange;"><%= notice %></p>
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="page-header">Dashboard</h2>
+      </div>
+    </div>
+    <!-- /.row -->
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fa fa-mobile fa-5x"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <div class="huge"><%= @deviceDetail %></div>
+                <div>Total Devices!</div>
+              </div>
+            </div>
+          </div>
+          <a href="/admin/device_details">
+            <div class="panel-footer">
+              <span class="pull-left">Total Devices</span>
+              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+              <div class="clearfix"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fa fa-user fa-5x"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <div class="huge"><%= @userDetail %></div>
+                <div>Total Users!</div>
+              </div>
+            </div>
+          </div>
+          <a href="/admin/user_details">
+            <div class="panel-footer">
+              <span class="pull-left">Total Users</span>
+              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+              <div class="clearfix"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fa fa-qrcode fa-5x"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <div class="huge"><%= @qrData %></div>
+                <div>Total Qrs!</div>
+              </div>
+            </div>
+          </div>
+          <a href="/admin/recently_addeds">
+            <div class="panel-footer">
+              <span class="pull-left">Total Qrs</span>
+              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+              <div class="clearfix"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+       <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fa fa-tablet fa-5x"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <div class="huge"><%= @appBanner %></div>
+                <div>App Banners!</div>
+              </div>
+            </div>
+          </div>
+          <a href="/admin/recently_addeds">
+            <div class="panel-footer">
+              <span class="pull-left">App Banners</span>
+              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+              <div class="clearfix"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fa fa-gift fa-5x"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <div class="huge"><%= @redeemRequests %></div>
+                <div>Redeem Requests!</div>
+              </div>
+            </div>
+          </div>
+          <a href="/admin/redeems">
+            <div class="panel-footer">
+              <span class="pull-left">Redeem Requests</span>
+              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+              <div class="clearfix"></div>
+            </div>
+          </a>
+        </div>
+      </div>
+  </div>
+  <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->

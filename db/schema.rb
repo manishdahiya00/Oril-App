@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_20_092215) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_21_071354) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -111,10 +111,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_20_092215) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payouts", force: :cascade do |t|
+    t.string "payout_name"
+    t.string "payout_img_url"
+    t.string "payout_amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reels", force: :cascade do |t|
     t.integer "music_id"
     t.string "description"
     t.string "hastags"
+    t.string "videoUrl"
     t.boolean "allow_comments"
     t.integer "like_count", default: 0
     t.integer "view_count", default: 0
@@ -131,6 +140,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_20_092215) do
     t.string "description"
     t.string "user_id"
     t.string "reel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.string "transaction_name"
+    t.string "transaction_amount"
+    t.string "transaction_coins"
+    t.string "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -168,6 +186,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_20_092215) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "wallet_balance", default: 0
+    t.integer "check_in_balance", default: 0
+    t.integer "received_from_fans", default: 0
+    t.integer "video_upload_coins", default: 0
+    t.integer "total_spending", default: 0
+    t.datetime "last_check_in"
   end
 
   create_table "verification_requests", force: :cascade do |t|

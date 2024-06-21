@@ -15,7 +15,6 @@ module API
           begin
             user = User.find(params[:userId])
             if user.present?
-              ActiveStorage::Current.url_options = { host:"http://192.168.1.32:8000" }
               reels = []
               User.where.not(id: user.blocked_users.pluck(:blocked_user)).each do |reel_user|
                 reel_user.reels.where(isReported: false,is_approved: true).order("RANDOM()").limit(6).each do |reel|
@@ -24,7 +23,7 @@ module API
                   reels << {
                      reelId: reel.id,
                      allowComments: reel.allow_comments,
-                     videoUrl: reel.video.url,
+                     videoUrl: reel.videoUrl,
                      isLiked: isLiked,
                      reelDescription: reel.description,
                      musicTitle: reel.music&.title || nil,
@@ -40,6 +39,7 @@ module API
                   }
                 end
               end
+              puts reels.to_s
             { status: 200, message: "Success", reels: reels }
             else
             { status: 500, message: "User Not Found" }
@@ -100,7 +100,6 @@ module API
               data = {}
               notificationsList = []
               user.notifications.where.not(creator_id: user.id).order(created_at: :desc).paginate(page: params[:page], per_page: 12).each do |notification|
-                puts notification.id
                 user = User.find(notification.creator_id)
                 notificationsList << {
                   id: notification.id,
@@ -113,7 +112,6 @@ module API
                 }
               end
               data[:notificationList] = notificationsList
-              puts notificationsList.to_s
               { status: 200, message: "Success", data: data || {} }
             else
               { status: 500, message: "User Not Found"}
