@@ -1,4 +1,13 @@
 <!-- Page Content -->
+<style>
+ .button{
+        color: #357bb7;
+        font-weight: normal;
+        align-items: start;
+        border: none;
+        background-color: transparent;
+      }
+</style>
 <div id="page-wrapper">
   <div class="container-fluid">
     <div class="row">
@@ -41,14 +50,18 @@
                 <td><%= reel.creater_id %></td>
                 <td>
                     <% if reel.is_approved %>
-                        <%= button_to "Disapprove", approveReel_admin_reel_path(reel), method: :put %>
+                        <%= button_to "Disapprove", approveReel_admin_reel_path(reel), method: :put,class:"button" %>
                     <% else %>
-                        <%= button_to "Approve", approveReel_admin_reel_path(reel), method: :put %>
+                        <%= button_to "Approve", approveReel_admin_reel_path(reel), method: :put,class:"button" %>
                     <% end %>
                 </td>
-                <td>
-                  <%= link_to 'Show', admin_reel_path(reel) %>
-                </td>
+               <td>
+                <div style="display: flex;gap:5px;">
+                    <%= link_to 'Show', admin_reel_path(reel) %> |
+                    <%= button_to 'Delete', admin_reel_path(reel), method: :delete,class:"button" %>
+                </div>
+            </td>
+
               </tr>
             <% end %>
           </tbody>

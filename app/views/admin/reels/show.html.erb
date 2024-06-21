@@ -1,0 +1,54 @@
+ <div class="container">
+        <div class="row">
+            <!-- Video on the left side -->
+            <div class="col-md-6">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video class="embed-responsive-item" controls>
+                        <source src="<%= @reel.videoUrl %>">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <!-- Data on the right side -->
+            <div class="col-md-6">
+                <table class="table table-responsive table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Music Id</th>
+              <th>Description</th>
+              <th>Hastags</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><%= @reel.id %></td>
+                <td><%= @reel.music_id %></td>
+                <td><%= @reel.description %></td>
+                <td><%= @reel.hastags %></td>
+              </tr>
+          </tbody>
+        </table>
+          <table class="table table-responsive table-bordered">
+          <thead>
+            <tr>
+              <th>Like Count</th>
+              <th>View Count</th>
+              <th>Report Count</th>
+              <th>Creator ID</th>
+              <th>Approved</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><%= @reel.like_count %></td>
+                <td><%= @reel.view_count %></td>
+                <td><%= @reel.report_count %></td>
+                <td><%= @reel.creater_id %></td>
+                <td><%= @reel.is_approved %></td>
+              </tr>
+          </tbody>
+        </table>
+            </div>
+        </div>
+    </div>

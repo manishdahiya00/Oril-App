@@ -300,8 +300,13 @@ module API
           begin
             user = User.find(params[:userId])
             if user.present?
+              if user.show_liked_reels == true
+                showReels = true
+              else
+                showReels = false
+              end
               data = {
-                showYourLikedVideos: user.show_liked_reels,
+                showYourLikedVideos: showReels,
                 shareProfile: "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/users/#{user.id}/?inviteBy=#{user.refer_code}",
                 verification: user.status,
                 termsOfUse: "#{BASE_URL}/terms_of_use.html",
