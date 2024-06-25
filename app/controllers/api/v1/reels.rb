@@ -28,7 +28,7 @@ module API
               description: params[:description],
               video: video
             )
-             video_url = reel.video.url
+            video_url = reel.video.url.sub(/\?.*/, '')
             reel.update(videoUrl: video_url)
             { status: 200, message: "Success", data: "Reel Created Successfully" }
           else
