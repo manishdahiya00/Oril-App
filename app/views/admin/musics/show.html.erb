@@ -1,0 +1,30 @@
+<!-- Show Music Details -->
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="page-header">Music Details</h2>
+      </div>
+      <div class="col-lg-6">
+        <dl class="dl-horizontal">
+          <dt>Title:</dt>
+          <dd><%= @music.title %></dd>
+
+          <dt>Music URL:</dt>
+          <dd><%= @music.music_url %></dd>
+
+          <dt>Image URL:</dt>
+          <dd><%= @music.image_url %></dd>
+
+          <dt>Singer:</dt>
+          <dd><%= @music.singer %></dd>
+
+          <dt>Created At:</dt>
+          <dd><%= @music.created_at.strftime("%d/%m/%y %I:%M %p") %></dd>
+        </dl>
+        <%= link_to 'Edit', edit_admin_music_path(@music), class: 'btn btn-primary' %>
+        <%= link_to 'Back', admin_musics_path, class: 'btn btn-default' %>
+      </div>
+    </div>
+  </div>
+</div>

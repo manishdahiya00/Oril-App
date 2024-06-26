@@ -141,15 +141,16 @@ module API
                   shareUrl:  "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/reels/#{reel.id}/?inviteBy=#{creator.refer_code}",
                 }
               end
-              elsif params[:hashtag].present?
-                hashtags = Reel.where("hastags LIKE ?","%#{params[:hashtag]}%")
-                hashtags.where(isReported: false,is_approved: true).order(created_at: :desc).each do |reel|
-              creator = User.find(reel.creater_id)
-              isLiked = user.likes.find_by(reel_id: reel.id).present?
+            elsif params[:hashtag].present?
+              normalized_hashtag = params[:hashtag].gsub("#", "")
+              hashtags = Reel.where("hastags LIKE ?", "%#{normalized_hashtag}%")
+              hashtags.where(isReported: false, is_approved: true).each do |reel|
+                creator = User.find(reel.creater_id)
+                isLiked = user.likes.find_by(reel_id: reel.id).present?
                 reels << {
                   reelId: reel.id,
                   allowComments: reel.allow_comments,
-                  videoUrl: reel.video.url,
+                  videoUrl: reel.videoUrl,
                   isLiked: isLiked,
                   reelDescription: reel.description,
                   musicTitle: reel.music&.title,

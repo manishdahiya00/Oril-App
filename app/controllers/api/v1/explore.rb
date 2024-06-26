@@ -28,7 +28,7 @@ module API
                 }
               end
               popular_reels = Reel.where(isReported: false,is_approved: true).where.not(hastags: ["", " ", "#", "# "]).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).order(like_count: :desc).limit(10)
-              popular_hashtags = Hash.new { |hash, key| hash[key] = { hashName: "##{key}", hashData: [] } }
+              popular_hashtags = Hash.new { |hash, key| hash[key] = { hashName: "#{key}", hashData: [] } }
               popular_reels.each do |reel|
                 hashtags = reel.hastags.split(" ")
                 hashtags.each do |hashtag|

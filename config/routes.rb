@@ -10,11 +10,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
-    resources :reels do
-      member do
-        put 'approveReel'
-      end
-    end
+    resources :reels
+    resources :musics
+    put 'reels/:id/approveReel', to: 'reels#approveReel', as: 'approve_reel'
   end
 
 end

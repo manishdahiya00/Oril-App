@@ -79,6 +79,7 @@
             <th>Referal Url</th>
             <th>Refer Code</th>
             <th>Source Ip</th>
+            <th>Security Token</th>
             <th>Verified</th>
             <th>Category</th>
           </tr>
@@ -90,7 +91,7 @@
         <td><%= @user.source_ip %></td>
         <td><%= @user.security_token %></td>
         <td><%= @user.is_verified %></td>
-        <td><%= @user.category %></td>
+        <td><%= @user.category || "UNDEFINED" %></td>
           </tr>
         </tbody>
       </table>

@@ -1,35 +1,43 @@
- <div class="container">
-        <div class="row">
-            <!-- Video on the left side -->
-            <div class="col-md-6">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <video class="embed-responsive-item" controls>
-                        <source src="<%= @reel.videoUrl %>">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-            </div>
-            <!-- Data on the right side -->
-            <div class="col-md-6">
-                <table class="table table-responsive table-bordered">
+<!-- Reels Details Page -->
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="page-header">Reels Details</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Video Section -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <video class="embed-responsive-item" controls>
+            <source src="<%= @reel.videoUrl %>">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <!-- Data Section -->
+        <table class="table table-bordered">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Music Id</th>
+              <th>Music ID</th>
               <th>Description</th>
-              <th>Hastags</th>
+              <th>Hashtags</th>
             </tr>
           </thead>
           <tbody>
-              <tr>
-                <td><%= @reel.id %></td>
-                <td><%= @reel.music_id %></td>
-                <td><%= @reel.description %></td>
-                <td><%= @reel.hastags %></td>
-              </tr>
+            <tr>
+              <td><%= @reel.id %></td>
+              <td><%= @reel.music_id %></td>
+              <td><%= @reel.description %></td>
+              <td><%= @reel.hastags %></td>
+            </tr>
           </tbody>
         </table>
-          <table class="table table-responsive table-bordered">
+
+        <table class="table table-bordered">
           <thead>
             <tr>
               <th>Like Count</th>
@@ -40,15 +48,16 @@
             </tr>
           </thead>
           <tbody>
-              <tr>
-                <td><%= @reel.like_count %></td>
-                <td><%= @reel.view_count %></td>
-                <td><%= @reel.report_count %></td>
-                <td><%= @reel.creater_id %></td>
-                <td><%= @reel.is_approved %></td>
-              </tr>
+            <tr>
+              <td><%= @reel.like_count %></td>
+              <td><%= @reel.view_count %></td>
+              <td><%= @reel.report_count %></td>
+              <td><%= @reel.creater_id %></td>
+              <td><%= @reel.is_approved %></td>
+            </tr>
           </tbody>
         </table>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
+</div>

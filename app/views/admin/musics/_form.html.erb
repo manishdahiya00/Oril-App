@@ -1,0 +1,38 @@
+<%= form_with(model: music, url: music.new_record? ? admin_musics_path : admin_music_path(music), method: music.new_record? ? :post : :patch) do |form| %>
+  <% if music.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(music.errors.count, "error") %> prohibited this music from being saved:</h2>
+
+      <ul>
+        <% music.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :music_url %>
+    <%= form.text_field :music_url, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :image_url %>
+    <%= form.text_field :image_url, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :singer %>
+    <%= form.text_field :singer, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', admin_musics_path, class: 'btn btn-default' %>
+  </div>
+<% end %>
