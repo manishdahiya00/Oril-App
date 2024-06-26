@@ -32,7 +32,7 @@
                 <td><%= user.version_code %> / <%= user.version_name %></td>
                 <td><%= user.created_at.strftime("%d/%m/%y %I:%M %p") %></td>
                 <td>
-                  <%= link_to 'Show', admin_user_path(user) %>
+                  <%= link_to 'Show', admin_user_path(user),class: 'btn btn-primary btn-sm' %>
                 </td>
               </tr>
             <% end %>

@@ -21,7 +21,7 @@ module API
           end
 
           def api_params
-            Rails.logger.info"API Params:#{params.inspect}"
+            Rails.logger.info "API Params:#{params.inspect}"
           end
 
         end

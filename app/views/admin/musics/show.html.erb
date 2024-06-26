@@ -5,23 +5,23 @@
       <div class="col-lg-12">
         <h2 class="page-header">Music Details</h2>
       </div>
-      <div class="col-lg-6">
-        <dl class="dl-horizontal">
-          <dt>Title:</dt>
-          <dd><%= @music.title %></dd>
-
-          <dt>Music URL:</dt>
-          <dd><%= @music.music_url %></dd>
-
-          <dt>Image URL:</dt>
-          <dd><%= @music.image_url %></dd>
-
-          <dt>Singer:</dt>
-          <dd><%= @music.singer %></dd>
-
-          <dt>Created At:</dt>
-          <dd><%= @music.created_at.strftime("%d/%m/%y %I:%M %p") %></dd>
-        </dl>
+      <div class="col-lg-12">
+        <table class="table table-bordered">
+          <thead>
+              <th>Title</th>
+              <th>Music URL</th>
+              <th>Image URL</th>
+              <th>Singer</th>
+              <th>Created At</th>
+          </thead>
+          <tbody>
+              <td><%= @music.title %></td>
+              <td><%= @music.music_url %></td>
+              <td><%= @music.image_url %></td>
+              <td><%= @music.singer %></td>
+              <td><%= @music.created_at.strftime("%d/%m/%y %I:%M %p") %></td>
+          </tbody>
+        </table>
         <%= link_to 'Edit', edit_admin_music_path(@music), class: 'btn btn-primary' %>
         <%= link_to 'Back', admin_musics_path, class: 'btn btn-default' %>
       </div>
