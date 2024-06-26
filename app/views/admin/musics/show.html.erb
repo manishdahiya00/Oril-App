@@ -16,7 +16,12 @@
           </thead>
           <tbody>
               <td><%= @music.title %></td>
-              <td><%= @music.music_url %></td>
+              <td> 
+                <audio controls>
+                  <source src="<%= @music.music_url %>">
+                    Your browser does not support the audio element.
+                  </audio> 
+              </td>
               <td><%= @music.image_url %></td>
               <td><%= @music.singer %></td>
               <td><%= @music.created_at.strftime("%d/%m/%y %I:%M %p") %></td>
