@@ -139,7 +139,105 @@
           </tr>
         </tbody>
       </table>
+
+      <h2>Reels</h2>
+      <% if @reels.any? %>
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Description</th>
+              <th>Hashtags</th>
+              <th>Video URL</th>
+              <th>Allow Comments</th>
+              <th>Approved</th>
+              <th>Like Count</th>
+              <th>View Count</th>
+              <th>Report Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @reels.each do |reel| %>
+                <tr>
+                 <td><a href="/admin/reels/<%= reel.id %>"><%= reel.id %></a></td>
+                  <td><%= reel.description %></td>
+                  <td><%= reel.hastags %></td>
+                  <td><%= reel.videoUrl[0,50] + "..." %></td>
+                  <td><%= reel.allow_comments ? 'Yes' : 'No' %></td>
+                  <td><%= reel.is_approved %></td>
+                  <td><%= reel.like_count %></td>
+                  <td><%= reel.view_count %></td>
+                  <td><%= reel.report_count %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </tbody>
+        </table>
+        <%= will_paginate @reels %>
+      <% else %>
+      <h3>No Reels Found</h3>
+      <% end %>
+
       
+      <h2>Transaction History</h2>
+      <% if @transactions.any? %>
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Transaction Name</th>
+              <th>Transaction Amount</th>
+              <th>Transaction Coins</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @transactions.each do |transaction| %>
+                <tr>
+                  <td><%= transaction.id %></td>
+                  <td><%= transaction.transaction_name %></td>
+                  <td> ₹ <%= transaction.transaction_amount %></td>
+                  <td><%= transaction.transaction_coins %></td>
+                 </tr>
+              <% end %>
+            </tbody>
+          </tbody>
+        </table>
+        <%= will_paginate @transactions %>
+      <% else %>
+      <h3>No Transaction History Found</h3>
+      <% end %>
+
+      <h2>Orders</h2>
+      <% if @orders.any? %>
+      <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Amount</th>
+              <th>Payment ID</th>
+              <th>Order ID</th>
+              <th>Receipt</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @orders.each do |order| %>
+                <tr>
+                  <td><%= order.id %></td>
+                  <td><%= order.amount %></td>
+                  <td><%= order.payment_id %></td>
+                  <td><%= order.order_id %></td>
+                  <td><%= order.receipt %></td>
+                  <td><%= order.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
+                 </tr>
+              <% end %>
+            </tbody>
+          </tbody>
+        </table>
+        <%= will_paginate @orders %>
+      <% else %>
+      <h3>No Orders Found</h3>
+      <% end %>
     </div>
   </div>
 </div>

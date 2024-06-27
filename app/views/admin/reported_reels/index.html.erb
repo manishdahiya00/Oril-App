@@ -27,8 +27,8 @@
                   <td><%= reported_reel.id %></td>
                   <td><%= reported_reel.reporting_reason %></td>
                   <td><%= reported_reel.description %></td>
-                  <td><%= reported_reel.user_id %></td>
-                  <td><%= reported_reel.reel_id %></td>
+                  <td><a href="/admin/users/<%= reported_reel.user_id %>"><%= reported_reel.user_id %></a></td>
+                  <td><a href="/admin/reels/<%= reported_reel.reel_id %>"><%= reported_reel.reel_id %></a></td>
                   <td><%= reported_reel.created_at.strftime("%Y-%m-%d %I:%M:%p") %></td>
                   <td>
                     <div style="display: flex;gap:5px;"> 

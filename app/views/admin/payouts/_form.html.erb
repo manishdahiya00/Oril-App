@@ -1,0 +1,33 @@
+<%= form_with(model: payout, url: payout.new_record? ? admin_payouts_path : admin_payout_path(payout), method: payout.new_record? ? :post : :patch) do |form| %>
+  <% if payout.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(payout.errors.count, "error") %> prohibited this payout from being saved:</h2>
+
+      <ul>
+        <% payout.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :payout_name %>
+    <%= form.text_field :payout_name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :payout_img_url %>
+    <%= form.text_field :payout_img_url, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :payout_amount %>
+    <%= form.text_field :payout_amount, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', admin_payouts_path, class: 'btn btn-default' %>
+  </div>
+<% end %>

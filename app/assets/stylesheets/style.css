@@ -1,0 +1,1010 @@
+/* 
+Theme Name:		 Genesis Block Child Theme
+Theme URI:		 https://triller.co/
+Description:	 Genesis Block Child Theme is a child theme of Genesis Block Theme.
+Author:			 Triller
+Author URI:		 https://triller.co/
+Template:		 genesis-block-theme
+Version:		 1.0.0
+Text Domain:	 genesis-block-child-theme
+*/
+
+/*
+    Add your custom styles here
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/*******************************************************************************************
+go.triller.co Landing page 
+ ********************************************************************************************/
+.gt-hero .elementor-fit-aspect-ratio {
+  height: auto;
+}
+.gt-hero .elementor-video {
+  height: 100vh;
+}
+.gt-videobg .elementor-background-overlay {
+  z-index: 10;
+}
+.gt-hero-txt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 240px);
+}
+.gt-hero-txt h1 {
+  color: #fff;
+  font-family: "proxima-nova", proxima-nova, sans-serif;
+  font-size: 132px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+  padding: 0 0 26px 0;
+}
+.gt-hero-txt h2 {
+  color: #fff;
+  font-family: "plau", proxima-nova, sans-serif;
+  font-size: 48px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+  padding: 0;
+}
+@media screen and (max-width: 1024px) {
+  .gt-hero-wrapper,
+  .gt-hero,
+  .gt-hero .elementor-video {
+    height: 600px !important;
+  }
+  .gt-hero-txt h1 {
+    font-size: 86px;
+  }
+  .gt-hero-txt h2 {
+    font-size: 39px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .gt-hero-wrapper,
+  .gt-hero,
+  .gt-hero .elementor-video {
+    height: 700px !important;
+  }
+}
+@media screen and (max-width: 767px) {
+  .gt-hero-wrapper,
+  .gt-hero,
+  .gt-hero .elementor-video {
+    height: 310px !important;
+    overflow: hidden;
+  }
+  .gt-hero .elementor-column {
+    height: 90px !important;
+  }
+  .gt-hero-txt h1 {
+    font-size: 42px;
+    /* 		padding-bottom: 44px; */
+  }
+  .gt-hero-txt h2 {
+    font-size: 23px;
+  }
+  .gt-hero-txt {
+    height: auto;
+    padding-top: 82px !important;
+  }
+}
+
+.gt-social .elementor-widget-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gt-social a {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  padding: 0;
+  border: 1px solid #c7c7c7;
+  border-radius: 100px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gt-social a img {
+  float: left;
+  opacity: 0.8;
+  transition-duration: 0.3s;
+}
+.gt-social a:hover img {
+  opacity: 0.5;
+}
+.gt-social .heading-title {
+  color: #c7c7c7;
+  font-family: "proxima-nova", proxima-nova, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-right: 20px;
+}
+.gt-ttl-colored .elementor-heading-title {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: -moz-linear-gradient(90deg, #b81e85 0%, #ed197a 100%);
+  background-image: -webkit-linear-gradient(90deg, #b81e85 0%, #ed197a 100%);
+  background-image: -ms-linear-gradient(90deg, #b81e85 0%, #ed197a 100%);
+}
+.gt-video-box {
+  position: absolute !important;
+  z-index: 100;
+  overflow: hidden;
+}
+.gt-video video {
+  height: 797px;
+  object-fit: cover;
+}
+@media screen and (max-width: 1024px) {
+  .gt-video video {
+    height: 530px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .gt-splash .gt-video-box {
+    position: static !important;
+    height: 373px !important;
+    width: 200px !important;
+    margin: 10px auto !important;
+    background-color: transparent !important;
+    border-radius: 40px !important;
+  }
+}
+.gt-features .elementor-image-box-img {
+  border: 2px solid #888;
+  border-radius: 500px;
+  width: 92px !important;
+  height: 92px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 92px;
+  padding: 10px;
+}
+.gt-features span {
+  color: #ff008a;
+  font-weight: 700;
+}
+.gt-features .elementor-image-box-wrapper {
+  align-items: center !important;
+}
+.gt-heading-sm {
+  margin-bottom: 10px !important;
+}
+.gt-location .elementor-image-box-img {
+  min-height: 70px;
+}
+.gt-footer-links ul li a:before {
+  content: "";
+  position: absolute;
+  background: #fff;
+  width: 2px;
+  height: 2px;
+  right: -12px;
+  top: 13px;
+}
+.gt-footer-links ul li:last-child a:before {
+  content: none !important;
+}
+@media screen and (max-width: 767px) {
+  .gt-features .elementor-image-box-content {
+    padding-top: 10px;
+  }
+  .gt-skyrocket .elementor-widget-image img {
+    width: 58px;
+    height: 58px;
+  }
+  .gt-footer-links ul li a:before {
+    top: 9px;
+  }
+}
+
+/*******************************************************************************************
+Trillericonz Landing page 
+ ********************************************************************************************/
+@media screen and (max-width: 767px) {
+  .hide-m {
+    display: none;
+  }
+}
+
+/*Hero start*/
+.hero-caption .elementor-widget-container p {
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Roboto Condensed", Sans-serif;
+  margin-bottom: 20px;
+}
+.hero-caption .elementor-widget-container h1 {
+  font-size: 48px;
+  font-weight: 300;
+  margin: 0;
+  padding: 0 0 10px 0;
+  font-family: "Roboto Condensed", Sans-serif;
+}
+.hero-caption .elementor-button {
+  font-family: "Roboto Condensed", Sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  background-color: #ff3960;
+  border-radius: 50px 50px 50px 50px;
+  margin-bottom: 15px;
+}
+
+.arrow {
+  text-align: center;
+  margin-top: 15px;
+}
+.bounce {
+  -moz-animation: bounce 2s infinite;
+  -webkit-animation: bounce 2s infinite;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+@media screen and (max-width: 767px) {
+  .hero-caption .elementor-widget-container h1 {
+    font-size: 22px;
+  }
+  .hero-caption .elementor-widget-container p {
+    font-size: 14px;
+  }
+  .hero-caption .elementor-button {
+    font-size: 14px;
+  }
+  .how-to-enter .bottom-rules {
+    padding: 0px 20px 20px 20px !important;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .hero-caption .elementor-widget-container h1 {
+    font-size: 30px;
+  }
+  .hero-caption .elementor-widget-container p {
+    font-size: 18px;
+  }
+  .hero-caption .elementor-button {
+    font-size: 16px;
+  }
+}
+/*Hero end*/
+
+/*#Tag start*/
+.looking-box > div {
+  height: 640px;
+}
+.looking-box .elementor-image-box-title {
+  font-size: 30px;
+  text-align: center;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 8px;
+  display: inline-block;
+  margin-bottom: 50px;
+}
+.looking-box .elementor-widget-container {
+  display: flex;
+  align-items: flex-end;
+}
+.hashtags > div {
+  justify-content: center;
+}
+@media screen and (max-width: 1100px) {
+  .looking-box > div {
+    height: 500px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .looking-box > div {
+    height: 400px;
+  }
+  .looking-box .elementor-image-box-title {
+    font-size: 20px;
+    margin-bottom: 25px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .looking-box > div {
+    height: 160px;
+  }
+  .looking-box .elementor-image-box-title {
+    font-size: 13px;
+    padding: 3px 6px;
+    margin-bottom: 10px;
+  }
+}
+/*#Tag end*/
+
+/*Prizes start*/
+.prizes-box > div {
+  height: 190px;
+}
+.prizes-box .elementor-icon svg {
+  height: 90px;
+  width: auto;
+  margin-top: 15px;
+}
+.prizes-box .elementor-icon-box-title {
+  padding-left: 15px;
+  padding-right: 15px;
+  line-height: 1.2;
+}
+@media screen and (max-width: 767px) {
+  .prizes-box > div {
+    height: 100px;
+  }
+  .prizes-box .elementor-icon svg {
+    height: 40px;
+  }
+  .prizes-box .elementor-icon-box-title {
+    font-size: 12px !important;
+    padding: 0;
+  }
+}
+/*Prizes end*/
+
+/*Date section start*/
+.date-box > div {
+  height: 246px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.date-box .elementor-image-box-img {
+  display: none !important;
+}
+.date-box p {
+  max-width: 212px;
+  line-height: 1.3;
+}
+
+@media screen and (max-width: 767px) {
+  .dates .elementor-widget-wrap {
+    padding: 0 10px !important;
+  }
+  .date-box > div {
+    height: 135px !important;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .ttl-date {
+    min-height: 70px;
+    margin: 0 !important;
+    padding-top: 24px !important;
+  }
+}
+
+/*Date section end*/
+
+/*How to Enter section start*/
+.how-to-enter .bottom-rules {
+  max-width: 605px;
+  margin: auto;
+  padding: 0 10px 30px 10px;
+}
+.how-to-enter h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  padding: 25px 0 5px 0;
+  text-transform: uppercase;
+}
+.how-to-enter p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+}
+.how-to-enter p strong {
+  font-weight: 700;
+}
+.how-to-enter ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.how-to-enter ul li {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+/*How to Enter section end*/
+
+/*rules start*/
+.rules-text a {
+  color: #ff3960;
+  text-decoration: underline !important;
+}
+.rules-text a:hover {
+  color: #ff3960;
+  text-decoration: none !important;
+}
+.rules-text li {
+  margin-bottom: 20px;
+}
+.rules-text ol [type="a"] {
+  list-style-type: lower-alpha;
+}
+.rules-text ol [type="i"] {
+  list-style-type: upper-roman;
+}
+.rules-text ul [type="none"] {
+  list-style: none;
+}
+.rules-text table tr:nth-child(even) {
+  background: none;
+}
+.rules-text table th {
+  font-weight: 700;
+  border-bottom: solid 1px #f2f2f2;
+}
+.rules-text table u {
+  text-decoration: none !important;
+}
+.rules-text table {
+  margin-bottom: 0;
+  border-bottom: solid 1px #f2f2f2;
+}
+/*rules end*/
+
+/*******************************************************************************************
+residentdj Landing page 
+ ********************************************************************************************/
+/*hero banner start*/
+.rc-hero {
+  overflow: hidden;
+}
+.rc-hero .banner-text {
+  position: absolute !important;
+  top: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+.rc-hero .e-hosted-video {
+  height: 750px !important;
+}
+.rc-hero .elementor-video {
+  height: 750px !important;
+}
+@supports (-moz-appearance: none) {
+  .rc-hero .e-hosted-video {
+    height: 800px !important;
+  }
+  .rc-hero .elementor-video {
+    height: 800px !important;
+  }
+}
+h5.elementor-heading-title a:hover {
+  text-decoration: underline;
+}
+.res-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.res-profile > div {
+  justify-content: flex-end;
+  display: flex;
+}
+.res-profile img {
+  padding: 0 10px;
+  max-width: 150px !important;
+}
+.rc-footer-text p {
+  margin-bottom: 0;
+}
+.tpc-paused:before {
+  content: "";
+  position: absolute;
+  top: 190px;
+  z-index: 99;
+  left: 51.5%;
+  width: 40px;
+  height: 42px;
+  background: url("images/play.png") no-repeat;
+  transform: translateX(-50%);
+  background-size: 34px;
+  pointer-events: none;
+}
+.tpc-video-controls .elementor-custom-embed-image-overlay {
+  pointer-events: none !important;
+}
+@media screen and (max-width: 767px) {
+  .rc-hero .banner-text {
+    top: 40px;
+    width: 100%;
+  }
+  .rc-hero .banner-text .elementor-widget-container img {
+    max-width: 75%;
+  }
+  .rc-hero .banner-text .elementor-widget {
+    margin-bottom: 0 !important;
+  }
+  .res-profile img {
+    padding: 0 10px;
+    max-width: 90px !important;
+    margin-top: 15px;
+  }
+  .rc-hero .e-hosted-video {
+    height: 310px !important;
+  }
+  .rc-hero .elementor-video {
+    height: 310px !important;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 769px) {
+  .rc-hero .banner-text {
+    top: 30px;
+    width: 100%;
+  }
+  .rc-hero .banner-text .elementor-widget-container img {
+    max-width: 60%;
+  }
+  .rc-hero .banner-text .elementor-widget {
+    margin-bottom: 0 !important;
+  }
+  .res-profile img {
+    padding: 0 10px;
+    max-width: 80px !important;
+    margin-top: 15px;
+  }
+  .rc-hero .e-hosted-video {
+    height: 400px !important;
+  }
+  .rc-hero .elementor-video {
+    height: 400px !important;
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1366px) {
+  .rc-hero .e-hosted-video {
+    height: 450px !important;
+  }
+  .rc-hero .elementor-video {
+    height: 450px !important;
+  }
+  .rc-hero .banner-text {
+    top: 30px;
+    width: 100%;
+  }
+  .rc-hero .banner-text .elementor-widget-container img {
+    max-width: 45%;
+  }
+  .res-profile img {
+    padding: 0 10px;
+    max-width: 100px !important;
+    margin-top: 15px;
+  }
+}
+/*hero banner end*/
+.rc-footer-text .list-decimal {
+  list-style: none !important;
+}
+.rc-footer-text .list-decimal li {
+  list-style: none !important;
+}
+
+/*******************************************************************************************
+winner Landing page 
+ ********************************************************************************************/
+.win-pink {
+  color: #ff3960;
+}
+.play-overlay a {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #3b3b3b;
+}
+.play-overlay a:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: url("images/play.png") no-repeat center center;
+}
+.round-img .elementor-widget-container {
+  border-radius: 100px;
+  border: 4px solid #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  max-width: 150px;
+  display: inline-block;
+}
+
+.trillericonz-finalists .elementor-icon-list-item > a {
+  flex-direction: column;
+  line-height: 1.3;
+  margin-bottom: 30px;
+}
+
+/*******************************************************************************************
+404 page
+ ********************************************************************************************/
+.error404 .page-notfound a,
+.error404 .page-notfound a:hover {
+  color: #ff008a;
+}
+.error404 .page-notfound > div {
+  height: 100vh;
+}
+.error404 .elementor-location-footer,
+.error404 .elementor-location-header {
+  display: none;
+}
+
+/*******************************************************************************************
+Declaration Form
+ ********************************************************************************************/
+.row {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.row label {
+  font-family: "Roboto Condensed", Sans-serif;
+  font-size: 16px;
+  color: #efefef;
+  margin-bottom: 5px;
+  font-weight: 400;
+}
+.row abbr {
+  color: #cd0000;
+  border: 0;
+}
+.row .wpcf7-form-control {
+  height: 48px;
+  padding: 0 15px;
+  border-radius: 8px;
+  font-family: "Roboto Condensed", Sans-serif;
+  font-size: 16px;
+  color: #1d1d1d !important;
+  width: 100%;
+}
+.row.checkbox .wpcf7-form-control {
+  padding: 0;
+  margin: 0;
+}
+.row.checkbox .wpcf7-list-item {
+  margin: 0;
+}
+.row.checkbox input[type="checkbox"] {
+  margin-right: 5px;
+}
+.row input[type="submit"].wpcf7-form-control {
+  background-color: #ff3960;
+  font-size: 24px;
+  color: #fff !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+.row .wpcf7-form-control:focus-visible {
+  outline: -webkit-focus-ring-color auto 1px;
+}
+.row .col-half {
+  width: 50%;
+  padding: 0 8px;
+  margin-bottom: 20px;
+}
+.row .col-full {
+  width: 100%;
+  padding: 0 8px;
+  margin-bottom: 20px;
+}
+.wpcf7-response-output {
+  color: #fff;
+}
+.wpcf7-not-valid-tip {
+  font-size: 13px;
+  color: #cd0000;
+  padding-top: 3px;
+}
+
+@media screen and (max-width: 767px) {
+  .row {
+    flex-wrap: wrap;
+  }
+  .row .col-half,
+  .row .col-full {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .row-wrap .col-half {
+    width: 100%;
+  }
+}
+
+/*******************************************************************************************
+Spring Singles Landing page 
+ ********************************************************************************************/
+.music-form h3 {
+  font-family: "Roboto Condensed", Sans-serif;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0;
+  padding: 20px 0 0 0;
+}
+.music-form .row input[type="submit"].wpcf7-form-control {
+  background-color: #ff3960;
+  border-radius: 100px;
+  font-size: 18px;
+  text-transform: capitalize;
+}
+.music-form .codedropz-upload-handler {
+  border: 1px dashed #a4a4a4;
+  border-radius: 8px;
+  margin: 0;
+}
+.music-form .music-files {
+  font-weight: 400px;
+  font-size: 12px;
+  color: #c2c0c0;
+}
+.music-form .cd-upload-btn {
+  font-family: "Roboto Condensed", Sans-serif;
+  background-color: #ff3960;
+  font-size: 16px;
+  color: #fff !important;
+  font-weight: 700;
+  line-height: 32px;
+  height: 32px;
+  width: 120px;
+  border-radius: 100px;
+  display: inline-block;
+}
+.music-form .codedropz-upload-inner h3 {
+  font-family: "Roboto Condensed", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  margin: 0;
+  padding: 35px 0 0 0;
+  background: url("images/upload.png") no-repeat center top;
+}
+.music-form .codedropz-upload-inner span {
+  font-size: 12px;
+  color: #a4a4a4;
+  text-transform: uppercase;
+  font-family: "Roboto Condensed", Sans-serif;
+  margin: 10px 0;
+  display: block;
+}
+.music-form .dnd-upload-counter {
+  display: none;
+}
+.music-form .dnd-upload-status {
+  margin-top: 20px;
+}
+.music-form .codedropz-upload-container {
+  padding: 23px 20px;
+}
+.music-form .dnd-upload-status .dnd-upload-details .name em,
+.music-form .dnd-upload-status .dnd-upload-details .name span {
+  color: #fff;
+}
+.music-form .dnd-upload-status .dnd-upload-details .dnd-progress-bar {
+  background: #808080;
+  margin: 4px 0;
+  height: 3px;
+}
+.music-form .dnd-upload-status .dnd-upload-image {
+  background: #2a2a2a;
+  border-radius: 4px;
+  border: 0;
+}
+.music-form .dnd-upload-status .dnd-upload-image span.file {
+  background: url("images/fill.png") no-repeat center center;
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+.congratulations {
+  background: #0e0e0e;
+  border-radius: 8px;
+  max-width: 784px;
+  height: 412px;
+  margin: auto;
+  text-align: center;
+  padding-top: 110px;
+  color: #fff;
+  font-family: "Roboto Condensed", Sans-serif;
+}
+.congratulations h2 {
+  font-weight: bold;
+  font-size: 36px;
+  color: #fff;
+  font-family: "Roboto Condensed", Sans-serif;
+  margin: 0;
+}
+.congratulations p {
+  font-size: 24px;
+  color: #fff;
+  font-family: "Roboto Condensed", Sans-serif;
+}
+
+#spring-congratulations {
+  display: none;
+}
+#CurrentSingles .wpcf7 form.sent #spring-congratulations {
+  display: block;
+}
+#CurrentSingles .wpcf7 form.sent #springform-wrapper,
+.wpcf7 form.sent .wpcf7-response-output {
+  display: none;
+}
+
+.readmoretoggle .elementor-tab-title.elementor-active::before {
+  content: "READ LESS";
+  text-decoration: underline;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff !important;
+  font-family: "Roboto Condensed", Sans-serif;
+}
+.readmoretoggle a {
+  font-weight: 700;
+  color: #fff !important;
+  font-family: "Roboto Condensed", Sans-serif;
+}
+.readmoretoggle .elementor-toggle-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.readmoretoggle .elementor-active p a {
+  color: #ff3960 !important;
+}
+.readmoretoggle .elementor-tab-title.elementor-active a {
+  display: none;
+}
+
+.about-spring .elementor-widget-text-editor {
+  margin: 0;
+}
+.about-spring a {
+  padding-bottom: 15px;
+}
+#TermsandConditions a {
+  color: #ff3960 !important;
+}
+#springform-wrapper .wpcf7-spinner {
+  display: none;
+}
+
+/* custom checkbox styling for contact form 7 checkbox */
+
+.checkbox label {
+  position: relative;
+  cursor: pointer;
+}
+.checkbox input[type="checkbox"] {
+  /*position: relative;*/
+  position: absolute;
+  visibility: hidden;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  left: 0;
+}
+.checkbox input[type="checkbox"] + span {
+  /* border: 3px solid red; */
+}
+.checkbox input[type="checkbox"] + span:before {
+  display: block;
+  position: absolute;
+  content: "";
+  border-radius: 0;
+  height: 18px;
+  width: 18px;
+  top: 2px;
+  left: 0px;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.2);
+}
+.checkbox input[type="checkbox"] + span:after {
+  display: block;
+  position: absolute;
+  content: "\2713";
+  height: 18px;
+  width: 18px;
+  top: 2px;
+  left: 0;
+  visibility: hidden;
+  font-size: 12px;
+  text-align: center;
+  line-height: 19px;
+  background: #ff3960;
+  border-radius: 2px;
+}
+.checkbox input[type="checkbox"]:checked + span:before {
+  background: transparent;
+}
+.checkbox input[type="checkbox"]:checked + span:after {
+  visibility: visible;
+}
+.checkbox .wpcf7-list-item-label {
+  margin-left: 28px;
+  display: inline-block;
+}
+.dnd-upload-status.complete .dnd-upload-details {
+  position: relative;
+}
+.dnd-upload-status.complete .dnd-upload-details:before {
+  position: absolute;
+  content: "100%";
+  right: 0;
+  color: #a4a4a4;
+  top: 5px;
+  font-weight: 700;
+}
+.dnd-upload-status.complete .dnd-upload-details:after {
+  position: absolute;
+  content: "Complete!";
+  right: 0;
+  color: #7fbf00;
+  font-weight: 400;
+}
+.song-submit-btn .elementor-button {
+  background-color: none !important;
+}
+.song-submit-btn a {
+  font-family: "Roboto Condensed", Sans-serif;
+  background-color: #ff3960;
+  font-size: 16px;
+  color: #fff !important;
+  font-weight: 700 !important;
+  line-height: 48px;
+  height: 48px;
+  width: 210px;
+  border-radius: 100px;
+  display: inline-block;
+}
+.submit_again {
+  font-family: "Roboto Condensed", Sans-serif;
+  background-color: #ff3960 !important;
+  font-size: 16px;
+  color: #fff !important;
+  font-weight: 700;
+  line-height: 48px;
+  height: 48px;
+  width: 255px;
+  border-radius: 100px !important;
+  display: inline-block;
+  text-transform: uppercase;
+}

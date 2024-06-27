@@ -3,7 +3,7 @@ module API
     module Defaults
       extend Grape::API::Helpers
 
-      BASE_URL = "http://192.168.1.32:8000/"
+      BASE_URL = "https://www.orilshorts.app"
       COIN_LIST = ["20","40","60","80","100"]
       PROFILE_CATEGORY = ['Dance', 'Politics', 'Actor', 'Sports', 'Decor']
 

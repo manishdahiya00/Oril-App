@@ -29,8 +29,8 @@
           </thead>
           <tbody>
             <tr>
-              <td><%= @reel.id %></td>
-              <td><%= @reel.music_id %></td>
+              <td><a href="/admin/reels/<%= @reel.id %>"><%= @reel.id %></a></td>
+              <td><a href="/admin/musics/<%= @reel.music_id %>"><%= @reel.music_id %></a></td>
               <td><%= @reel.description %></td>
               <td><%= @reel.hastags %></td>
             </tr>
@@ -52,7 +52,7 @@
               <td><%= @reel.like_count %></td>
               <td><%= @reel.view_count %></td>
               <td><%= @reel.report_count %></td>
-              <td><%= @reel.creater_id %></td>
+              <td><a href="/admin/users/<%= @reel.creater_id %>"><%= @reel.creater_id %></a></td>
               <td><%= @reel.is_approved %></td>
             </tr>
           </tbody>

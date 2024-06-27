@@ -1,0 +1,32 @@
+<!-- Show Payout Details -->
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="page-header">Payout Details</h2>
+      </div>
+      <div class="col-lg-12">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Payout Name</th>
+              <th>Payout Image URL</th>
+              <th>Payout Amount</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @payout.id %></td>
+              <td><%= @payout.payout_name %></td>
+              <td><img style="width:50px;" src="<%=@payout.try(:payout_img_url)%>" onerror="this.onerror=null;this.src='https://cdn.pixabay.com/photo/2014/03/24/17/21/wrong-295503_640.png';" /></td>
+              <td><%= @payout.payout_amount %></td>
+              <td><%= @payout.created_at.strftime("%d/%m/%y %I:%M %p") %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

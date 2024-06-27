@@ -50,7 +50,7 @@
                 <td><%= reel.description %></td>
                 <td><%= reel.like_count %></td>
                 <td><%= reel.report_count %></td>
-                <td><%= reel.creater_id %></td>
+                <td><a href="/admin/users/<%= reel.creater_id %>"><%= reel.creater_id %></a></td>
                 <td>
                     <% if reel.is_approved %>
                         <%= button_to "Disapprove", admin_approve_reel_path(reel), method: :put,class: 'btn btn-danger btn-sm' %>

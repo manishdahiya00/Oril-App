@@ -52,7 +52,7 @@
               <td><%= @reel.like_count %></td>
               <td><%= @reel.view_count %></td>
               <td><%= @reel.report_count %></td>
-              <td><%= @reel.creater_id %></td>
+              <td><a href="/admin/users/<%= @reel.creater_id %>"><%= @reel.creater_id %></a></td>
               <td><%= @reel.is_approved %></td>
             </tr>
           </tbody>

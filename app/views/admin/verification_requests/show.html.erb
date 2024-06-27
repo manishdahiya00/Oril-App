@@ -1,0 +1,40 @@
+<!-- app/views/admin/verification_requests/show.html.erb -->
+
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="page-header">Verification Request Details</h2>
+      </div>
+      <div class="col-lg-12">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User ID</th>
+              <th>Social Image</th>
+              <th>Social Type</th>
+              <th>Social ID</th>
+              <th>Status</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @verification_request.id %></td>
+              <td><a href="/admin/users/<%= @verification_request.user_id %>"><%= @verification_request.user_id %></a></td>
+              <td>
+                  <img style="width: 50px;" src="<%= @verification_request.selfie_image.url %>"
+                       onerror="this.onerror=null;this.src='https://cdn.pixabay.com/photo/2014/03/24/17/21/wrong-295503_640.png';" />
+              </td>
+              <td><%= @verification_request.social_type %></td>
+              <td><%= @verification_request.social_id %></td>
+              <td><%= @verification_request.status %></td>
+              <td><%= @verification_request.created_at.strftime("%d/%m/%y %I:%M %p") %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

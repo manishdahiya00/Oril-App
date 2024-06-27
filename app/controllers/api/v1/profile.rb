@@ -22,7 +22,7 @@ module API
               isFollowing = Follow.find_by(follower_id: current_user.id,following_id: user.id).present?
               isBlocked = current_user.blocked_users.find_by(blocked_user: params[:creatorId]).present?
               followers = user.followers.where.not(id: user.blocked_users.pluck(:blocked_user))
-              following = user.followers.where.not(id: user.blocked_users.pluck(:blocked_user))
+              following = user.following.where.not(id: user.blocked_users.pluck(:blocked_user))
               creatorReels = []
               likedReels = []
               profileData = {

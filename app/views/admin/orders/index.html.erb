@@ -1,0 +1,46 @@
+<!-- app/views/admin/orders/index.html.erb -->
+
+<div id="page-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="page-header">Orders</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <% if @orders.any? %>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Amount</th>
+                <th>Payment ID</th>
+                <th>Order ID</th>
+                <th>Receipt</th>
+                <th>Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @orders.each do |order| %>
+                <tr>
+                  <td><%= order.id %></td>
+                   <td><a href="/admin/users/<%= order.user_id %>"><%= order.user_id %></a></td>
+                  <td><%= order.amount %></td>
+                  <td><%= order.payment_id %></td>
+                  <td><%= order.order_id %></td>
+                  <td><%= order.receipt %></td>
+                  <td><%= order.created_at.strftime("%d/%m/%Y %I:%M %p") %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <%= will_paginate @orders %>
+        <% else %>
+          <h3>No Orders Found</h3>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

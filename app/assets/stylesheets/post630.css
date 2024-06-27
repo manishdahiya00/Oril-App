@@ -1,0 +1,46 @@
+.elementor-630
+  .elementor-element.elementor-element-368478ca
+  > .elementor-container {
+  max-width: 700px;
+}
+.elementor-630 .elementor-element.elementor-element-368478ca {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 0px 0px 0px 0px;
+}
+.elementor-630
+  .elementor-element.elementor-element-654edc23
+  > .elementor-element-populated {
+  margin: 0px 0px 0px 0px;
+  --e-column-margin-right: 0px;
+  --e-column-margin-left: 0px;
+}
+.elementor-630
+  .elementor-element.elementor-element-71c1e44
+  > .elementor-widget-container {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+#elementor-popup-modal-630 .dialog-message {
+  width: 640px;
+  height: auto;
+}
+#elementor-popup-modal-630 {
+  justify-content: center;
+  align-items: center;
+  pointer-events: all;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+#elementor-popup-modal-630 .dialog-close-button {
+  display: flex;
+  font-size: 24px;
+}
+#elementor-popup-modal-630 .dialog-widget-content {
+  box-shadow: 2px 8px 23px 3px rgba(0, 0, 0, 0.2);
+}
+#elementor-popup-modal-630 .dialog-close-button i {
+  color: #ffffff;
+}
+#elementor-popup-modal-630 .dialog-close-button svg {
+  fill: #ffffff;
+}

@@ -11,7 +11,7 @@ class Admin::ReportedReelsController < Admin::AdminController
     @reportedReel = ReportedReel.find(params[:id])
     @reel = Reel.find(@reportedReel.reel_id)
     @reel.comments.destroy_all
-    Like.where(reel_id: @reel.id).destroy
+    Like.where(reel_id: @reel.id).destroy_all
     @reel.destroy
     @reportedReel.destroy
     redirect_to admin_reported_reels_path, notice: 'Reel was successfully deleted.'
