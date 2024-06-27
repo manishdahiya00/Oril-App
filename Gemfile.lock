@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/google/google-id-token.git
+  revision: ba413fe1fdcff59f177f44943e89a534cee7e26f
+  specs:
+    google-id-token (1.4.2)
+      jwt (>= 1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -159,6 +166,8 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
+    jwt (2.8.2)
+      base64
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -293,6 +302,7 @@ DEPENDENCIES
   capybara
   debug
   geocoder
+  google-id-token!
   grape (~> 2.0)
   importmap-rails
   jbuilder
