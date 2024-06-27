@@ -21,5 +21,6 @@ Rails.application.routes.draw do
     put 'reels/:id/approveReel', to: 'reels#approveReel', as: 'approve_reel'
     put 'reported_reels/:id/approveReel', to: 'reported_reels#approveReel', as: 'approve_reported_reel'
   end
+  post "/admin/payouts/:id" => "admin/users#payout"
 
 end

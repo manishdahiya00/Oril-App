@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_21_071354) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_27_110305) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -115,6 +115,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_21_071354) do
     t.string "payout_name"
     t.string "payout_img_url"
     t.string "payout_amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "redeems", force: :cascade do |t|
+    t.string "number_or_email"
+    t.string "upi_id"
+    t.string "user_id"
+    t.string "coins"
+    t.string "payout_id"
+    t.string "status", default: "PENDING"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

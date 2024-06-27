@@ -132,7 +132,7 @@ module API
             user = User.find(params[:userId])
             if user.present?
              if user.wallet_balance >= params[:coins].to_i
-              user.redeems.create(number_or_email: params[:numberOrEmail], upi_id: params[:upiId], coins: params[:coins], payout_id: params[:payoutId])
+              user.redeems.create(number_or_email: params[:numberOrEmail], upi_id: params[:upiId], coins: params[:coins], payout_id: params[:payoutId],status: "PENDING")
               wallet_balance = user.wallet_balance - params[:coins].to_i
               user.update(wallet_balance: wallet_balance)
               user.transactions.create(transaction_name: "Withdrawl Request",transaction_amount: params[:coins].to_f / 100,transaction_coins: params[:coins])

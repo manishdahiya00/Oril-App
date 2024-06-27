@@ -178,6 +178,73 @@
       <h3>No Reels Found</h3>
       <% end %>
 
+
+      <h2>Redeems</h2>
+      <% if @redeems.any? %>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Number Or Email</th>
+              <th>UPI Id</th>
+              <th>Coins</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @redeems.each do |redeem| %>
+              <tr>
+                <td><%= redeem.id %></td>
+                <td><%= redeem.number_or_email %></td>
+                <td><%= redeem.upi_id %></td>
+                <td><%= redeem.coins %></td>
+                <td>₹ <%= redeem.coins.to_f / 100 %></td>
+                <td><%= redeem.status %></td>
+                <td class="fs-5">
+                <% unless redeem.status == "COMPLETED" %>
+                  <div class="btn btn-primary" data-toggle="modal" data-target="#exampleModal<%= redeem.id %>">Payout</div>
+                  <div class="modal fade" id="exampleModal<%= redeem.id %>" tabindex="-1" aria-labelledby="exampleModalLabel<%= redeem.id %>" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel<%= redeem.id %>">Payout</h1>
+                        </div>
+                        <div class="modal-body">
+                          <%= form_with(url: admin_payout_path, method: :post) do |f| %>
+                            <%= f.hidden_field :id, value: redeem.id, class: "form-control" %>
+                            <div class="mb-3">
+                              <%= f.label :amount, class: "form-label" %>
+                              <%= f.text_field :amount, class: "form-control", title: "Please enter the amount", required: true %>
+                            </div>
+                            <div class="mb-3">
+                              <%= f.label :secret, class: "form-label" %>
+                              <%= f.text_field :secret, class: "form-control", required: true %>
+                            </div>
+                            <%= submit_tag "Payout", class: "btn btn-primary" %>
+                          <% end %>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% else %>
+                  <p style="color:Green;">PAYOUT SUCCESSFULL !!</p>
+                <% end %>
+                </td>
+              </tr>
+            <% end %>
+           </tbody>
+         </table>
+      <%= will_paginate @redeems %>
+     <% else %>
+    <h3>No Redeems Found</h3>
+   <% end %>
+
+
       
       <h2>Transaction History</h2>
       <% if @transactions.any? %>
