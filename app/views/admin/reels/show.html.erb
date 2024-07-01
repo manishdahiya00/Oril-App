@@ -25,6 +25,7 @@
               <th>Music ID</th>
               <th>Description</th>
               <th>Hashtags</th>
+              <th>Category</th>
             </tr>
           </thead>
           <tbody>
@@ -33,10 +34,10 @@
               <td><%= @reel.music_id %></td>
               <td><%= @reel.description %></td>
               <td><%= @reel.hastags %></td>
+              <td><%= @reel.category %></td>
             </tr>
           </tbody>
         </table>
-
         <table class="table table-bordered">
           <thead>
             <tr>
@@ -57,9 +58,8 @@
             </tr>
           </tbody>
         </table>
-
-      <h2>Comments</h2>
-      <table class="table table-bordered">
+        <h2>Comments</h2>
+        <table class="table table-bordered">
           <thead>
             <tr>
               <th>Comment Id</th>
@@ -69,15 +69,14 @@
           </thead>
           <tbody>
             <% @reel.comments.each do |comment| %>
-            <tr>
-              <td><%= comment.id %></td>
-              <td><%= comment.content %></td>
-              <td><%= comment.user_id %></td>
-            </tr>
+              <tr>
+                <td><%= comment.id %></td>
+                <td><%= comment.content %></td>
+                <td><%= comment.user_id %></td>
+              </tr>
             <% end %>
           </tbody>
         </table>
-
       </div>
     </div>
   </div>

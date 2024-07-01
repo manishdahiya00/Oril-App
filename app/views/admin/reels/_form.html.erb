@@ -2,7 +2,6 @@
   <% if reel.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(reel.errors.count, "error") %> prohibited this reel from being saved:</h2>
-
       <ul>
         <% reel.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -10,53 +9,48 @@
       </ul>
     </div>
   <% end %>
-
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-    <%= form.label :music_id, 'Music Title' %>
-    <%= form.select :music_id, options_for_select(Music.pluck(:title, :id), @reel.music_id), { include_blank: true }, { class: 'form-control' } %>
-    </div>
-
+        <%= form.label :music_id, 'Music Title' %>
+        <%= form.select :music_id, options_for_select(Music.pluck(:title, :id), @reel.music_id), { include_blank: true }, { class: 'form-control' } %>
+      </div>
       <div class="form-group">
         <%= form.label :description %>
         <%= form.text_field :description, class: 'form-control' %>
       </div>
-
       <div class="form-group">
         <%= form.label :hastags %>
         <%= form.text_field :hastags, class: 'form-control' %>
       </div>
-
       <div class="form-group">
         <%= form.label :videoUrl %>
         <%= form.text_field :videoUrl, class: 'form-control' %>
       </div>
+      <div class="form-group">
+        <%= form.label :category %>
+        <%= form.select :category, options_for_select(["trending","motivation","love","funny","travel"], @reel.category), {}, { class: 'form-control' } %>
+      </div>
     </div>
-
     <div class="col-md-6">
       <div class="form-group">
         <%= form.label :allow_comments %>
         <%= form.select :allow_comments, options_for_select([['Yes', true], ['No', false]], @reel.allow_comments), {}, { class: 'form-control' } %>
       </div>
-
       <div class="form-group">
         <%= form.label :creater_id, 'Creator' %>
         <%= form.select :creater_id, options_for_select(@users.map { |user| [user.social_name, user.id] }), {}, { class: 'form-control' } %>
       </div>
-
       <div class="form-group">
         <%= form.label :isReported %>
         <%= form.select :isReported, options_for_select([['No', false], ['Yes', true]], @reel.isReported), {}, { class: 'form-control' } %>
       </div>
-
       <div class="form-group">
         <%= form.label :is_approved %>
         <%= form.select :is_approved, options_for_select([['No', false], ['Yes', true]], @reel.is_approved), {}, { class: 'form-control' } %>
       </div>
     </div>
   </div>
-
   <div class="row">
     <div class="col-md-6">
       <div class="actions">

@@ -9,6 +9,7 @@ class Admin::ReelsController < Admin::AdminController
   def show
     @reel = Reel.find(params[:id])
   end
+
   def new
     @reel = Reel.new
     @users = User.limit(10)
@@ -18,7 +19,7 @@ class Admin::ReelsController < Admin::AdminController
     @reel = Reel.new(reel_params)
 
     if @reel.save
-      redirect_to admin_reel_path(@reel), notice: 'Reel was successfully created.'
+      redirect_to admin_reel_path(@reel), notice: "Reel was successfully created."
     else
       @users = User.limit(10)
       render :new
@@ -34,7 +35,7 @@ class Admin::ReelsController < Admin::AdminController
     @reel = Reel.find(params[:id])
 
     if @reel.update(reel_params)
-      redirect_to admin_reel_path(@reel), notice: 'Reel was successfully updated.'
+      redirect_to admin_reel_path(@reel), notice: "Reel was successfully updated."
     else
       @users = User.limit(10)
     end
@@ -43,7 +44,7 @@ class Admin::ReelsController < Admin::AdminController
   def destroy
     @reel = Reel.find(params[:id])
     @reel.destroy
-    redirect_to admin_reels_path, notice: 'Reel was successfully deleted.'
+    redirect_to admin_reels_path, notice: "Reel was successfully deleted."
   end
 
   def approveReel
@@ -59,6 +60,6 @@ class Admin::ReelsController < Admin::AdminController
   private
 
   def reel_params
-    params.require(:reel).permit(:music_id, :description, :hastags, :videoUrl, :allow_comments, :creater_id, :isReported, :is_approved)
+    params.require(:reel).permit(:music_id, :description, :hastags, :videoUrl, :allow_comments, :creater_id, :isReported, :is_approved, :category)
   end
 end

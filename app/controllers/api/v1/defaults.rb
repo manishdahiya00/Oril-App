@@ -4,8 +4,9 @@ module API
       extend Grape::API::Helpers
 
       BASE_URL = "https://www.orilshorts.app"
-      COIN_LIST = ["20","40","60","80","100"]
-      PROFILE_CATEGORY = ['Dance', 'Politics', 'Actor', 'Sports', 'Decor']
+      COIN_LIST = ["20", "40", "60", "80", "100"]
+      PROFILE_CATEGORY = ["Dance", "Politics", "Actor", "Sports", "Decor"]
+      PROFILE_HASHTAGS = ["trending", "love", "motivation", "funny", "travel"]
 
       def self.included(base)
         base.prefix :api
@@ -23,7 +24,6 @@ module API
           def api_params
             Rails.logger.info "API Params:#{params.inspect}"
           end
-
         end
       end
     end
