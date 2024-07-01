@@ -45,8 +45,8 @@ module API
             { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - homeForYou - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - homeForYou - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -78,8 +78,8 @@ module API
               { status: 500, message: "User Not Found"}
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - homeFollowing - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - homeFollowing - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -117,8 +117,8 @@ module API
               { status: 500, message: "User Not Found"}
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - notificationList - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - notificationList - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end

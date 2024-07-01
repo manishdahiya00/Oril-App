@@ -42,8 +42,9 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - coinWallet - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - coinWallet - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
+
           end
         end
       end
@@ -74,8 +75,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - addCash - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - addCash - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -109,8 +110,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - redeemList - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - redeemList - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -145,8 +146,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - redeemSubmit - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - redeemSubmit - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -182,8 +183,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - sendGift - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - sendGift - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -213,8 +214,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - transactionHistory - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - transactionHistory - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end

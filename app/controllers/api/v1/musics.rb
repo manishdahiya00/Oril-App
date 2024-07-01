@@ -37,8 +37,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - musicDetail - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - musicDetail - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -84,8 +84,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - musicList - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - musicList - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -119,8 +119,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - favouriteMusic - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - favouriteMusic - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end

@@ -77,8 +77,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - showProfile - #{params.inspect} - Error - #{e.message}"
-        { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - showProfile - #{params.inspect} - Error - #{e}"
+        { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -119,8 +119,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - editProfile - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - editProfile - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -164,8 +164,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - likesList - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - likesList - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -201,8 +201,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - followersList - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - followersList - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -239,8 +239,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - followersList - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - followersList - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -280,8 +280,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - blockCreator - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - blockCreator - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -317,8 +317,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - settingList - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - settingList - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -352,8 +352,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - blockedProfile - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - blockedProfile - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -386,8 +386,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - blockedProfile - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - blockedProfile - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -412,8 +412,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - updateSettings - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - updateSettings - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end

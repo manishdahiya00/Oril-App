@@ -33,8 +33,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - videoUpload - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - videoUpload - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -67,8 +67,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - likeReel - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - likeReel - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -263,8 +263,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - reelsList - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - reelsList - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -289,8 +289,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - addComment - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - addComment - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -324,8 +324,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - commentList - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - commentList - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -354,8 +354,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - commetDelete - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - commetDelete - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -383,8 +383,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - viewCount - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - viewCount - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -419,8 +419,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - deleteReel - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - deleteReel - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -450,8 +450,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - reportReel - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - reportReel - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end

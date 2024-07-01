@@ -29,8 +29,8 @@ module API
               end
               popular_reels = Reel.where(isReported: false,is_approved: true).where.not(hastags: ["", " ", "#", "# "]).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).order(like_count: :desc).limit(10)
               popular_hashtags = Hash.new { |hash, key| hash[key] = { hashName: "#{key}", hashData: [] } }
-              popular_reels.each do |reel|
-                hashtags = reel.hastags.split(" ")
+              popular_reels.limit(5).each do |reel|
+                hashtags = reel.hastags.split(" ").first
                 hashtags.each do |hashtag|
                   normalized_hashtag = hashtag.delete_prefix("#").strip
                   next if normalized_hashtag.empty?
@@ -46,8 +46,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - explore - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - explore - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
@@ -130,8 +130,8 @@ module API
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - search - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - search - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end

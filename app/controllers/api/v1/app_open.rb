@@ -24,8 +24,8 @@ module API
               { status: 500, message: "User Not Found", error: e }
             end
           rescue Exception => e
-            Rails.logger.error "API Exception - #{Time.now} - appOpen - #{params.inspect} - Error - #{e.message}"
-            { status: 500, message: "Error", error: e.message }
+            Rails.logger.error "API Exception - #{Time.now} - appOpen - #{params.inspect} - Error - #{e}"
+            { status: 500, message: "Error", error: e }
           end
         end
       end
