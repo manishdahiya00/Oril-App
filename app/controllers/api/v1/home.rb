@@ -16,8 +16,8 @@ module API
             user = User.find(params[:userId])
             if user.present?
               reels = []
-              User.where.not(id: user.blocked_users.pluck(:blocked_user)).sample.each do |reel_user|
-                reel_user.reels.where(isReported: false,is_approved: true).order(created_at: :desc).limit(6).each do |reel|
+              User.where.not(id: user.blocked_users.pluck(:blocked_user)).each do |reel_user|
+                reel_user.reels.where(isReported: false,is_approved: true).order("RAND()").limit(6).each do |reel|
                   creator = User.find(reel.creater_id)
                   isLiked = user.likes.find_by(reel_id: reel.id).present?
                   reels << {
