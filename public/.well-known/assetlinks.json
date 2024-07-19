@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.apps.oril",
+      "sha256_cert_fingerprints": [
+        "E1:1B:4C:A6:AE:F7:8E:BA:21:1E:B5:3B:ED:19:2F:F4:3A:30:96:A9:40:52:88:C8:D3:66:BD:0D:3B:C2:71:BD"
+      ]
+    }
+  }
+]

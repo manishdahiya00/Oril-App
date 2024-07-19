@@ -295,7 +295,7 @@ module API
               end
               data = {
                 showYourLikedVideos: showReels,
-                shareProfile: "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/invite/#{user.refer_code}/",
+                shareProfile: "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/users/#{user.id}/",
                 verification: user.status,
                 termsOfUse: "#{BASE_URL}/terms_of_use.html",
                 privacyPolicy: "#{BASE_URL}/privacy_policy.html",
