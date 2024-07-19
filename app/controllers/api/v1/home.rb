@@ -34,7 +34,7 @@ module API
                     creatorImageUrl: creator.social_img_url,
                     isVerified: creator.is_verified,
                     profileCategory: creator.category,
-                    shareUrl: "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/reels/#{reel.id}/",
+                    shareUrl: "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/invite/#{user.refer_code}/",
                   }
                 end
               end

@@ -4,8 +4,7 @@ module API
       include API::V1::Defaults
 
       resource :showProfile do
-        before {api_params}
-
+        before { api_params }
 
         params do
           use :common_params
@@ -19,7 +18,7 @@ module API
             user = User.find(params[:creatorId])
             if user.present?
               current_user = User.find(params[:userId])
-              isFollowing = Follow.find_by(follower_id: current_user.id,following_id: user.id).present?
+              isFollowing = Follow.find_by(follower_id: current_user.id, following_id: user.id).present?
               isBlocked = current_user.blocked_users.find_by(blocked_user: params[:creatorId]).present?
               followers = user.followers.where.not(id: user.blocked_users.pluck(:blocked_user))
               following = user.following.where.not(id: user.blocked_users.pluck(:blocked_user))
@@ -32,59 +31,59 @@ module API
                 faceBookUrl: user.facebook_url,
                 instaUrl: user.insta_url,
                 youTubeUrl: user.yt_url,
-                likesCount:  user.reels.sum(:like_count),
+                likesCount: user.reels.sum(:like_count),
                 followersCount: followers.count,
                 followingCount: following.count,
                 userCategory: user.category || "Actor",
                 userBio: user.bio,
-                isVerified: user.is_verified
+                isVerified: user.is_verified,
               }
-             if !isBlocked
-              reels = user.reels.where(isReported: false,is_approved: true).paginate(page: params[:page], per_page: 12)
-              reels.order(created_at: :desc).each_with_index do |reel,index|
-                creatorReels << {
-                  reelId: reel.id,
-                  reelUrl: reel.videoUrl,
-                  views: reel.view_count,
-                  index: index,
-                  page: params[:page]
-                }
+              if !isBlocked
+                reels = user.reels.where(isReported: false, is_approved: true).paginate(page: params[:page], per_page: 12)
+                reels.order(created_at: :desc).each_with_index do |reel, index|
+                  creatorReels << {
+                    reelId: reel.id,
+                    reelUrl: reel.videoUrl,
+                    views: reel.view_count,
+                    index: index,
+                    page: params[:page],
+                  }
+                end
+                liked_reels = Like.where(user_id: user.id).joins(:reel)
+                  .where(reels: { isReported: false, is_approved: true }).paginate(page: params[:page], per_page: 12)
+                liked_reels.order(created_at: :desc).each_with_index do |reel, index|
+                  liked_reel = Reel.find(reel.reel_id)
+                  likedReels << {
+                    reelId: liked_reel.id,
+                    reelUrl: liked_reel.videoUrl,
+                    views: liked_reel.view_count,
+                    index: index,
+                    page: params[:page],
+                  }
+                end
               end
-              liked_reels = Like.where(user_id: user.id).joins(:reel)
-              .where(reels: { isReported: false,is_approved: true }).paginate(page: params[:page], per_page: 12)
-              liked_reels.order(created_at: :desc).each_with_index do |reel,index|
-                liked_reel = Reel.find(reel.reel_id)
-                likedReels << {
-                  reelId: liked_reel.id,
-                  reelUrl: liked_reel.videoUrl,
-                  views: liked_reel.view_count,
-                  index: index,
-                  page: params[:page]
-                }
-              end
-             end
-             if user.id == current_user.id
-                creatorLikedReels = likedReels
-             else
-              if user.show_liked_reels == true
+              if user.id == current_user.id
                 creatorLikedReels = likedReels
               else
-                creatorLikedReels = []
+                if user.show_liked_reels == true
+                  creatorLikedReels = likedReels
+                else
+                  creatorLikedReels = []
+                end
               end
-             end
-            { status: 200, message: "Success", isFollowing: isFollowing, isBlocked: isBlocked, profileData: profileData || {}, creatorReels: creatorReels || [], creatorLikedReels: creatorLikedReels || [] }
+              { status: 200, message: "Success", isFollowing: isFollowing, isBlocked: isBlocked, profileData: profileData || {}, creatorReels: creatorReels || [], creatorLikedReels: creatorLikedReels || [] }
             else
               { status: 500, message: "User Not Found" }
             end
           rescue Exception => e
             Rails.logger.error "API Exception - #{Time.now} - showProfile - #{params.inspect} - Error - #{e}"
-        { status: 500, message: "Error", error: e }
+            { status: 500, message: "Error", error: e }
           end
         end
       end
 
       resource :editProfile do
-        before {api_params}
+        before { api_params }
 
         params do
           use :common_params
@@ -113,8 +112,8 @@ module API
               else
                 social_name = params[:fullName]
               end
-              user.update(social_img_url: image_url,category: params[:profileCategory], social_name: social_name,user_name: params[:userName], bio: params[:bio], insta_url: params[:instagramUrl],yt_url: params[:youtubeUrl],facebook_url: params[:fbUrl],profileImage: image)
-              { status: 200, message: "Success" ,data: "Profile updated successfully"}
+              user.update(social_img_url: image_url, category: params[:profileCategory], social_name: social_name, user_name: params[:userName], bio: params[:bio], insta_url: params[:instagramUrl], yt_url: params[:youtubeUrl], facebook_url: params[:fbUrl], profileImage: image)
+              { status: 200, message: "Success", data: "Profile updated successfully" }
             else
               { status: 500, message: "User Not Found" }
             end
@@ -125,10 +124,8 @@ module API
         end
       end
 
-
-
       resource :likesList do
-        before {api_params}
+        before { api_params }
 
         params do
           use :common_params
@@ -141,7 +138,7 @@ module API
             if user.present?
               data = []
               creator = User.find(params[:creatorId])
-              user_reels_ids = creator.reels.where(isReported: false,is_approved: true).pluck(:id)
+              user_reels_ids = creator.reels.where(isReported: false, is_approved: true).pluck(:id)
               user_liked_reels = Like.where(reel_id: user_reels_ids)
               user_ids_who_liked = user_liked_reels.pluck(:user_id)
               users = User.where(id: user_ids_who_liked).where.not(id: user.blocked_users.pluck(:blocked_user))
@@ -159,7 +156,7 @@ module API
                   }
                 end
               end
-              { status: 200, message: "Success" , data: data || []}
+              { status: 200, message: "Success", data: data || [] }
             else
               { status: 500, message: "User Not Found" }
             end
@@ -170,9 +167,8 @@ module API
         end
       end
 
-
       resource :followersList do
-        before {api_params}
+        before { api_params }
 
         params do
           use :common_params
@@ -196,7 +192,7 @@ module API
                   likesCount: user.reels.sum(:like_count),
                 }
               end
-              { status: 200, message: "Success" , data: data || []}
+              { status: 200, message: "Success", data: data || [] }
             else
               { status: 500, message: "User Not Found" }
             end
@@ -207,10 +203,8 @@ module API
         end
       end
 
-
-
       resource :followingsList do
-        before {api_params}
+        before { api_params }
 
         params do
           use :common_params
@@ -234,7 +228,7 @@ module API
                   likesCount: user.reels.sum(:like_count),
                 }
               end
-              { status: 200, message: "Success" , data: data || []}
+              { status: 200, message: "Success", data: data || [] }
             else
               { status: 500, message: "User Not Found" }
             end
@@ -245,11 +239,8 @@ module API
         end
       end
 
-
-
       resource :blockCreator do
-        before {api_params}
-
+        before { api_params }
 
         params do
           use :common_params
@@ -260,22 +251,22 @@ module API
           begin
             user = User.find(params[:userId])
             if user.present?
-               creator = User.find(params[:creatorId])
-               if creator.id != user.id
+              creator = User.find(params[:creatorId])
+              if creator.id != user.id
                 if creator.present?
                   blocked_user = user.blocked_users.find_by(blocked_user: params[:creatorId])
-                  { status: 200, message: "Success", data: "Creator removed from blocklist"}
+                  { status: 200, message: "Success", data: "Creator removed from blocklist" }
                   if !blocked_user.present?
                     user.blocked_users.create(blocked_user: params[:creatorId].to_i)
-                  { status: 200, message: "Success", data: "You blocked this creator"}
+                    { status: 200, message: "Success", data: "You blocked this creator" }
                   else
                     blocked_user.destroy
-                    { status: 200, message: "Success", data: "You unblocked this creator"}
+                    { status: 200, message: "Success", data: "You unblocked this creator" }
                   end
-                 else
-                { status: 500, message: "Creator Not Found" }
-                 end
-               end
+                else
+                  { status: 500, message: "Creator Not Found" }
+                end
+              end
             else
               { status: 500, message: "User Not Found" }
             end
@@ -286,11 +277,8 @@ module API
         end
       end
 
-
-
       resource :settingList do
-        before {api_params}
-
+        before { api_params }
 
         params do
           use :common_params
@@ -307,12 +295,12 @@ module API
               end
               data = {
                 showYourLikedVideos: showReels,
-                shareProfile: "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/users/#{user.id}/?inviteBy=#{user.refer_code}",
+                shareProfile: "Hi, I am using this Amazing & Wonderful App to get rid of my Boredom in the Leisure Time. Download & Try this App. Click here: #{BASE_URL}/invite/#{user.refer_code}/",
                 verification: user.status,
                 termsOfUse: "#{BASE_URL}/terms_of_use.html",
                 privacyPolicy: "#{BASE_URL}/privacy_policy.html",
               }
-              { status: 200, message: "Success", data: data}
+              { status: 200, message: "Success", data: data }
             else
               { status: 500, message: "User Not Found" }
             end
@@ -323,10 +311,8 @@ module API
         end
       end
 
-
       resource :blockedProfile do
-        before {api_params}
-
+        before { api_params }
 
         params do
           use :common_params
@@ -347,7 +333,7 @@ module API
                   isVerified: blockedUser.is_verified,
                 }
               end
-              { status: 200, message: "Success", blockedUsers: blockedUsers || []}
+              { status: 200, message: "Success", blockedUsers: blockedUsers || [] }
             else
               { status: 500, message: "User Not Found" }
             end
@@ -359,8 +345,7 @@ module API
       end
 
       resource :verificationRequest do
-        before {api_params}
-
+        before { api_params }
 
         params do
           use :common_params
@@ -378,10 +363,10 @@ module API
                 user_id: user.id,
                 social_type: params[:socialType],
                 social_id: params[:socialId],
-                selfie_image: image
+                selfie_image: image,
               )
               user.update(status: "Verification Pending")
-              { status: 200, message: "Success", data: "Verification Request Submitted"}
+              { status: 200, message: "Success", data: "Verification Request Submitted" }
             else
               { status: 500, message: "User Not Found" }
             end
@@ -392,10 +377,8 @@ module API
         end
       end
 
-
       resource :updateSetting do
-        before {api_params}
-
+        before { api_params }
 
         params do
           use :common_params
@@ -407,7 +390,7 @@ module API
             user = User.find(params[:userId])
             if user.present?
               user.update(show_liked_reels: params[:showYourLikedVideos])
-              { status: 200, message: "Success", data: "Settings updated successfully"}
+              { status: 200, message: "Success", data: "Settings updated successfully" }
             else
               { status: 500, message: "User Not Found" }
             end
@@ -417,8 +400,6 @@ module API
           end
         end
       end
-
-
     end
   end
 end
