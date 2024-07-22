@@ -101,10 +101,11 @@ module API
           begin
             user = User.find(params[:userId])
             if user.present?
-              if params[:profileImage].nil?
+              if !params[:profileImage].present?
                 image_url = user.social_img_url
               else
                 image = ActionDispatch::Http::UploadedFile.new(params[:profileImage])
+                user.update(profileImage: image)
                 image_url = user.profileImage.url
               end
               if params[:fullName].nil?
@@ -112,7 +113,9 @@ module API
               else
                 social_name = params[:fullName]
               end
-              user.update(social_img_url: image_url, category: params[:profileCategory], social_name: social_name, user_name: params[:userName], bio: params[:bio], insta_url: params[:instagramUrl], yt_url: params[:youtubeUrl], facebook_url: params[:fbUrl], profileImage: image)
+              user.update(category: params[:profileCategory], social_name: social_name, user_name: params[:userName], bio: params[:bio], insta_url: params[:instagramUrl], yt_url: params[:youtubeUrl], facebook_url: params[:fbUrl])
+
+              user.update(social_img_url: image_url)
               { status: 200, message: "Success", data: "Profile updated successfully" }
             else
               { status: 500, message: "User Not Found" }

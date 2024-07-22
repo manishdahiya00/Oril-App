@@ -22,6 +22,6 @@ Rails.application.routes.draw do
     put "verifyRequest/:id", to: "verification_requests#verifyUser", as: "verify_request"
     put "reels/:id/approveReel", to: "reels#approveReel", as: "approve_reel"
     put "reported_reels/:id/approveReel", to: "reported_reels#approveReel", as: "approve_reported_reel"
+    post "payouts/:id", to: "users#payout", as: "payout"
   end
-  post "/admin/payouts/:id" => "admin/users#payout"
 end

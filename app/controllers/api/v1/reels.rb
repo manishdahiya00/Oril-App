@@ -136,8 +136,21 @@ module API
                   }
                 end
               elsif params[:hashtag].present?
-                normalized_hashtag = params[:hashtag].gsub("#", "")
-                hashtags = Reel.where("hastags LIKE ?", "%#{normalized_hashtag}%")
+                hashtag = params[:hashtag]
+                case hashtag
+                when "trending"
+                  hashtags = Reel.where(isReported: false, is_approved: true, category: hashtag)
+                when "motivation"
+                  hashtags = Reel.where(isReported: false, is_approved: true, category: hashtag)
+                when "love"
+                  hashtags = Reel.where(isReported: false, is_approved: true, category: hashtag)
+                when "funny"
+                  hashtags = Reel.where(isReported: false, is_approved: true, category: hashtag)
+                when "travel"
+                  hashtags = Reel.where(isReported: false, is_approved: true, category: hashtag)
+                else
+                  hashtags = []
+                end
                 hashtags.where(isReported: false, is_approved: true).each do |reel|
                   creator = User.find(reel.creater_id)
                   isLiked = user.likes.find_by(reel_id: reel.id).present?
