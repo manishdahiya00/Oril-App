@@ -213,7 +213,7 @@
                         </div>
                         <div class="modal-body">
                           <%= form_with(url: admin_payout_path, method: :post) do |f| %>
-                            <%= f.text_field :payout_id, value: redeem.id, class: "form-control" %>
+                            <%= f.hidden_field :payout_id, value: redeem.id, class: "form-control" %>
                             <div class="mb-3">
                               <%= f.label :amount, class: "form-label" %>
                               <%= f.text_field :amount, class: "form-control", title: "Please enter the amount", required: true %>
