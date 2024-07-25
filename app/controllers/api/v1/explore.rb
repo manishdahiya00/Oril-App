@@ -93,7 +93,7 @@ module API
                     fullName: user.social_name,
                     userName: user.user_name,
                     isVerified: user.is_verified,
-                    followersCount: user..followers.where.not(id: user.blocked_users.pluck(:blocked_user)).count,
+                    followersCount: user.followers.where.not(id: user.blocked_users.pluck(:blocked_user)).count,
                     likesCount: user.reels.where(isReported: false, is_approved: true).sum(:like_count),
                   }
                 end

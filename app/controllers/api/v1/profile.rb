@@ -31,7 +31,7 @@ module API
                 faceBookUrl: user.facebook_url,
                 instaUrl: user.insta_url,
                 youTubeUrl: user.yt_url,
-                likesCount: user..reels.where(isReported: false, is_approved: true).sum(:like_count),
+                likesCount: user.reels.where(isReported: false, is_approved: true).sum(:like_count),
                 followersCount: followers.count,
                 followingCount: following.count,
                 userCategory: user.category || "Actor",
