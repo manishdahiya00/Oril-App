@@ -145,7 +145,7 @@ module API
               users = User.where(id: user_ids_who_liked).where.not(id: user.blocked_users.pluck(:blocked_user))
               users.each do |user|
                 user.likes.where(reel_id: user_reels_ids).each do |like|
-                  if like.reel.is_approved == true && like.reel.is_reported == false
+                  if like.reel.is_approved == true && like.reel.isReported == false
                     data << {
                       reelId: like.reel_id,
                       creatorId: user.id,
