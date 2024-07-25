@@ -28,6 +28,8 @@ module API
               )
               video_url = reel.video.url.sub(/\?.*/, "")
               reel.update(videoUrl: video_url)
+              wallet_balance = user.wallet_balance + 10
+              user.update(wallet_balance: wallet_balance)
               { status: 200, message: "Success", data: "Reel Created Successfully" }
             else
               { status: 500, message: "User Not Found" }
