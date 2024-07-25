@@ -24,7 +24,7 @@ module API
                   creatorUserName: creator.user_name,
                   creatorImageUrl: creator.social_img_url,
                   isVerified: creator.is_verified,
-                  followersCount: creator.follower_count,
+                  followersCount: creator.followers.where.not(id: user.blocked_users.pluck(:blocked_user)).count,
                 }
               end
               POPULAR_HASHTAGS = ["trending", "motivation", "love", "funny", "travel"]
@@ -93,8 +93,8 @@ module API
                     fullName: user.social_name,
                     userName: user.user_name,
                     isVerified: user.is_verified,
-                    followersCount: user.followers.count,
-                    likesCount: user.reels.sum(:like_count),
+                    followersCount: user..followers.where.not(id: user.blocked_users.pluck(:blocked_user)).count,
+                    likesCount: user.reels.where(isReported: false, is_approved: true).sum(:like_count),
                   }
                 end
                 category_searched_reels = Reel.where(isReported: false, is_approved: true).where.not(creater_id: user.blocked_users.pluck(:blocked_user)).order(like_count: :desc).joins(:user).where(user: { category: params[:category] }).limit(20)
@@ -120,8 +120,8 @@ module API
                     fullName: user.social_name,
                     userName: user.user_name,
                     isVerified: user.is_verified,
-                    followersCount: user.followers.count,
-                    likesCount: user.reels.sum(:like_count),
+                    followersCount: user.followers.where.not(id: user.blocked_users.pluck(:blocked_user)).count,
+                    likesCount: user.reels.where(isReported: false, is_approved: true).sum(:like_count),
                   }
                 end
                 keyword_searched_reels.each do |reel|

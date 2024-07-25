@@ -31,7 +31,7 @@ module API
                 faceBookUrl: user.facebook_url,
                 instaUrl: user.insta_url,
                 youTubeUrl: user.yt_url,
-                likesCount: user.reels.sum(:like_count),
+                likesCount: user..reels.where(isReported: false, is_approved: true).sum(:like_count),
                 followersCount: followers.count,
                 followingCount: following.count,
                 userCategory: user.category || "Actor",
@@ -145,16 +145,18 @@ module API
               users = User.where(id: user_ids_who_liked).where.not(id: user.blocked_users.pluck(:blocked_user))
               users.each do |user|
                 user.likes.where(reel_id: user_reels_ids).each do |like|
-                  data << {
-                    reelId: like.reel_id,
-                    creatorId: user.id,
-                    creatorImageUrl: user.social_img_url,
-                    fullName: user.social_name,
-                    userName: user.user_name,
-                    isVerified: user.is_verified,
-                    followersCount: user.followers.count,
-                    likesCount: user.reels.sum(:like_count),
-                  }
+                  if like.is_approved == true && like.is_reported == false
+                    data << {
+                      reelId: like.reel_id,
+                      creatorId: user.id,
+                      creatorImageUrl: user.social_img_url,
+                      fullName: user.social_name,
+                      userName: user.user_name,
+                      isVerified: user.is_verified,
+                      followersCount: user.followers.where.not(id: user.blocked_users.pluck(:blocked_user)).count,
+                      likesCount: user.reels.where(isReported: false, is_approved: true).sum(:like_count),
+                    }
+                  end
                 end
               end
               { status: 200, message: "Success", data: data || [] }
@@ -182,15 +184,15 @@ module API
             if user.present?
               creator = User.find(params[:creatorId])
               data = []
-              creator.followers.where.not(id: user.blocked_users.pluck(:blocked_user)).each do |user|
+              creator.followers.where.not(id: user.blocked_users.pluck(:blocked_user)).where.not(id: creator.blocked_users.pluck(:blocked_user)).each do |user|
                 data << {
                   creatorId: user.id,
                   creatorImageUrl: user.social_img_url,
                   fullName: user.social_name,
                   userName: user.user_name,
                   isVerified: user.is_verified,
-                  followersCount: user.followers.count,
-                  likesCount: user.reels.sum(:like_count),
+                  followersCount: user.followers.where.not(id: user.blocked_users.pluck(:blocked_user)).count,
+                  likesCount: user.reels.where(isReported: false, is_approved: true).sum(:like_count),
                 }
               end
               { status: 200, message: "Success", data: data || [] }
@@ -218,15 +220,15 @@ module API
             if user.present?
               creator = User.find(params[:creatorId])
               data = []
-              creator.following.where.not(id: user.blocked_users.pluck(:blocked_user)).each do |user|
+              creator.following.where.not(id: user.blocked_users.pluck(:blocked_user)).where.not(id: creator.blocked_users.pluck(:blocked_user)).each do |user|
                 data << {
                   creatorId: user.id,
                   creatorImageUrl: user.social_img_url,
                   fullName: user.social_name,
                   userName: user.user_name,
                   isVerified: user.is_verified,
-                  followersCount: user.followers.count,
-                  likesCount: user.reels.sum(:like_count),
+                  followersCount: user.followers.where.not(id: user.blocked_users.pluck(:blocked_user)).count,
+                  likesCount: user.reels.where(isReported: false, is_approved: true).sum(:like_count),
                 }
               end
               { status: 200, message: "Success", data: data || [] }
