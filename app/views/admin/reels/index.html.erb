@@ -1,12 +1,12 @@
 <!-- Page Content -->
 <style>
- .button{
-        color: #357bb7;
-        font-weight: normal;
-        align-items: start;
-        border: none;
-        background-color: transparent;
-      }
+  .button{
+         color: #357bb7;
+         font-weight: normal;
+         align-items: start;
+         border: none;
+         background-color: transparent;
+       }
 </style>
 <div id="page-wrapper">
   <div class="container-fluid">
@@ -15,8 +15,8 @@
       <div class="col-lg-12">
         <h2 class="page-header" style="margin: 10px 0 15px !important;">Listing Reels</h2>
         <div class="col-lg-12 text-right">
-        <%= link_to 'New Reel', new_admin_reel_path, class: 'btn btn-primary', style: 'margin-bottom: 10px;' %>
-      </div>
+          <%= link_to 'New Reel', new_admin_reel_path, class: 'btn btn-primary', style: 'margin-bottom: 10px;' %>
+        </div>
       </div>
       <!-- Reels Table -->
       <% if @reels.present? %>
@@ -26,9 +26,9 @@
               <th>ID</th>
               <th>Video URL</th>
               <th>Description</th>
-              <th>Like Count</th>
-              <th>Report Count</th>
               <th>Creator ID</th>
+              <th>Created At</th>
+              <th>Updated At</th>
               <th>Approve</th>
               <th>Action</th>
             </tr>
@@ -48,24 +48,23 @@
                   <% end %>
                 </td>
                 <td><%= reel.description %></td>
-                <td><%= reel.like_count %></td>
-                <td><%= reel.report_count %></td>
                 <td><a href="/admin/users/<%= reel.creater_id %>"><%= reel.creater_id %></a></td>
+                <td><%= reel.created_at.strftime("%d/%m/%y %I:%M %p") %></td>
+                <td><%= reel.updated_at.strftime("%d/%m/%y %I:%M %p") %></td>
                 <td>
-                    <% if reel.is_approved %>
-                        <%= button_to "Disapprove", admin_approve_reel_path(reel), method: :put,class: 'btn btn-danger btn-sm' %>
-                    <% else %>
-                        <%= button_to "Approve", admin_approve_reel_path(reel), method: :put,class: 'btn btn-success btn-sm'%>
-                    <% end %>
+                  <% if reel.is_approved %>
+                    <%= button_to "Disapprove", admin_approve_reel_path(reel), method: :put,class: 'btn btn-danger btn-sm' %>
+                  <% else %>
+                    <%= button_to "Approve", admin_approve_reel_path(reel), method: :put,class: 'btn btn-success btn-sm'%>
+                  <% end %>
                 </td>
-               <td>
-                <div style="display: flex;gap:5px;">
+                <td>
+                  <div style="display: flex;gap:5px;">
                     <%= link_to 'Show', admin_reel_path(reel),class: 'btn btn-primary btn-sm' %>
                     <%= link_to 'Edit', edit_admin_reel_path(reel), method: :delete,class: 'btn btn-success btn-sm' %>
                     <%= button_to 'Delete', admin_reel_path(reel), method: :delete,class: 'btn btn-danger btn-sm' %>
-                </div>
-            </td>
-
+                  </div>
+                </td>
               </tr>
             <% end %>
           </tbody>
