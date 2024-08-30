@@ -9,5 +9,6 @@ module API
     mount API::V1::Musics
     mount API::V1::Follows
     mount API::V1::Redeem
+    mount API::V1::CricketReels
   end
 end
