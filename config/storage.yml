@@ -9,7 +9,7 @@
 digitalocean:
   service: S3
   access_key_id: ****
-  secret_access_key: ****/mgl24rCGdRT4
+  secret_access_key: *****
   region: ****
   bucket: ****
   endpoint: ***
