@@ -8,11 +8,11 @@
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 digitalocean:
   service: S3
-  access_key_id: MK6LIYIW2GJQWSFGTBZG
-  secret_access_key: 9yQudgFISM9l1QO1lOeNohAzOgzmLB/mgl24rCGdRT4
-  region: blr1
-  bucket: mindgeeksind
-  endpoint: https://blr1.digitaloceanspaces.com
+  access_key_id: ****
+  secret_access_key: ****/mgl24rCGdRT4
+  region: ****
+  bucket: ****
+  endpoint: ***
   http_open_timeout: 10
   http_read_timeout: 10
   retry_limit: 20
